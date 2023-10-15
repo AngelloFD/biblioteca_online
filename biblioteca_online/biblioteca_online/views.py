@@ -23,7 +23,7 @@ def agregar_libro(request):
 def confirmacion_agregar_libro(request):
     return render(request, 'confirmacion_agregar_libro.html')
 
-"@login_required"
+#@login_required
 def registrar_prestamo(request, libro_id):
     libro = Libro.objects.get(pk=libro_id)
     
@@ -35,8 +35,27 @@ def registrar_prestamo(request, libro_id):
         libro.save()
         return redirect('confirmacion_prestamo')
     else:
-        # El libro ya está prestado, maneja esta situación en tu plantilla
+        #el libro ya está prestado, maneja esta situación en tu plantilla
         return render(request, 'libro_prestado.html', {'libro': libro})
 
 def confirmacion_prestamo(request):
     return render(request, 'confirmacion_prestamo.html')
+
+#@login required
+def registrar_devolucion(request, libro_id):
+    libro = Libro.objects.get(pk=libro_id)
+
+    if not libro.disponible:
+        #verifica que el libro esté en buenas condiciones (esto es un ejemplo, puedes agregar más lógica de verificación)
+        libro.disponible = True
+        libro.fecha_prestamo = None
+        libro.fecha_vencimiento = None
+        libro.prestado_a = None
+        libro.save()
+        return redirect('confirmacion_devolucion')
+    else:
+        #el libro ya está disponible, maneja esta situación en tu plantilla
+        return render(request, 'libro_disponible.html', {'libro': libro})
+
+def confirmacion_devolucion(request):
+    return render(request, 'confirmacion_devolucion.html')
