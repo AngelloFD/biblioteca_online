@@ -75,8 +75,13 @@ WSGI_APPLICATION = 'biblioteca_online.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mssql',
+        "NAME": "biblioteca",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "DESKTOP-QCCGD0O\SQLEXPRESS01",
+        "PORT": "",
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server",}, 
     }
 }
 
