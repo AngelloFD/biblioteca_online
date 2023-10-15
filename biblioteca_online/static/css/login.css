@@ -21,7 +21,7 @@ p {
 }
 
 body {
-	background: rgb(254,175,0);
+	margin: 100vh;
 	background: linear-gradient(90deg, rgba(254,175,0,1) 45%, rgba(248,212,66,1) 57%);
 }
 
