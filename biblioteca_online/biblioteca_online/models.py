@@ -1,4 +1,5 @@
 from django.db import models
+django.contrib.auth.models import User
 
 class Libro(models.Model):
     titulo = models.CharField(max_length=200)
