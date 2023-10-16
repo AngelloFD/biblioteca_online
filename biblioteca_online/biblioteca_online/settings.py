@@ -79,7 +79,8 @@ DATABASES = {
         "NAME": "biblioteca",
         "USER": "",
         "PASSWORD": "",
-        "HOST": "DESKTOP-QCCGD0O\SQLEXPRESS01",
+        # TODO: ENV FILE CON NOMBRE DE HOST PARA EVITAR PROBLEMAS ENTRE TESTEOS
+        "HOST": "DESKTOP-880HDV9\SQLEXPRESS",
         "PORT": "",
         "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server",}, 
     }
