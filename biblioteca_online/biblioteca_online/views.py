@@ -14,7 +14,7 @@ def agregar_libro(request):
         form = LibroForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('confirmacion_agregar_libro')  # Redirige a la página de confirmación
+            return redirect('confirmacion_agregar_libro')  #redirige a la página de confirmación
     else:
         form = LibroForm()
     
