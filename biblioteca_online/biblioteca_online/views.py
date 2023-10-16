@@ -1,5 +1,8 @@
+from datetime import timezone
 from django.shortcuts import render
 from .forms import LibroForm
+
+from biblioteca_online.biblioteca_online.models import Libro
 
 def home_login(request):
     return render(request,'login.html')
@@ -20,6 +23,7 @@ def agregar_libro(request):
 
 def confirmacion_agregar_libro(request):
     return render(request, 'confirmacion_agregar_libro.html')
+
 
 #@login_required
 def registrar_prestamo(request, libro_id):
