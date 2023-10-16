@@ -1,13 +1,11 @@
 from django.shortcuts import render
+from .forms import LibroForm
 
 def home_login(request):
     return render(request,'login.html')
 
 def register(request):
     return render(request,'register.html')
-
-from django.shortcuts import render, redirect
-from .forms import LibroForm
 
 def agregar_libro(request):
     if request.method == 'POST':
