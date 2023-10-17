@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="\static\css\templatemo.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="\static\css\fontawesome.min.css">
+
+    {% block style2 %}{% endblock style2%}
 {% endblock style %}
 
 {% block body %}
@@ -82,7 +84,9 @@
 </nav>
 <!-- Close Header -->
 
+{% block content %}
 
+{% endblock content%}
 
 
 
