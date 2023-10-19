@@ -15,13 +15,7 @@
       TODO: ACTION DIRIJE A BIBLIOTECA PERO YA LOGUEADO 
       TODO: BOTON PARA VOLVER ATRÁS O REGISTRARSE
       {% endcomment %}
-      {% if messages %}
-         {% for messages in messages %}
-            {{message}}
-         {% endfor %}
-      {% endif %}
-
-      <form method="POST" action="/bibliotinka">
+      <form method="POST" action="bibliotinka">
          {% csrf_token %}
          <label for="email">Email</label><br>
          <input type="email" name="email" placeholder="Ingrese su correo" required /><br>
