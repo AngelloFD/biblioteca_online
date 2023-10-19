@@ -16,7 +16,7 @@ h3, label {
 	font-weight: 500;
 }
 
-p {
+p, a {
 	font-weight: 400;
 }
 
@@ -30,7 +30,7 @@ body {
 	flex-direction: column;
 	position: absolute;
 	justify-content: space-evenly;
-	padding: 0;
+	padding: 4%;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -69,7 +69,21 @@ body {
 	padding-top: 2%;
 	padding-bottom: 2%;
 }
-.form-container input[type="checkbox"] {
-   margin-top: 2%;
-   margin-bottom: 2%;
+.terms-checkbox-container {
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	align-items: center;
 }
+.terms-checkbox-container input[type="checkbox"] {
+	margin-left: auto;
+	/* margin-right: 5%; */
+}
+
+.terms-checkbox-container a {
+	color: #FEAF00;
+	text-decoration: none;
+	cursor: pointer;
+	margin-right: 1%;
+}
+/* TODO: RESPONSIVE */
