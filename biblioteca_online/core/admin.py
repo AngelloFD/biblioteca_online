@@ -1,10 +1,9 @@
 from django.contrib import admin
-from usuario.models import Usuario, Estado, InformeUsuario
+from usuario.models import Usuario, InformeUsuario
 from .models import Libro, Categoria, Ejemplares, Prestamo, ReclamoUsuario, Actividad
 
 # Register your models here.
 admin.site.register(Usuario)
-admin.site.register(Estado)
 admin.site.register(InformeUsuario)
 admin.site.register(Libro)
 admin.site.register(Categoria)
