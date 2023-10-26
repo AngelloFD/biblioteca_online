@@ -1,0 +1,55 @@
+{% extends "main.html" %}
+
+{% block style %}
+<link type="text/css" rel="stylesheet" href="\static\css\register.css" />
+{% endblock style %}
+
+{% block body %}
+<div class="center-container">
+   <h1>BIBLIOTINKA</h1>
+   <div class="info-container">
+      <h2>REGISTRO</h2>
+   </div>
+   <div class="form-container">
+      {% comment %} 
+      TODO: ACTION DIRIJE A LOGIN
+      TODO: username {% endcomment %}
+      <form method="POST" action="/bibliotinka">
+         {% csrf_token %}
+         <label>Username</label><br>
+         <input type="text" name="username" placeholder="Ingrese su username" required /><br>
+         <label>Email</label><br>
+         <input type="email" name="email" placeholder="Ingrese su correo" required /><br>
+         <label>Contraseña</label><br>
+         <input type="password" name="password1" placeholder="Contraseña" required /><br>
+         <label>Repita su contraseña</label><br>
+         <input type="password" name="password2" placeholder="Contraseña" required /><br>
+         <div class="terms-checkbox-container">
+            <label>Acepto los <a href="/register" class="middletext-link" data-bs-toggle="modal" data-bs-target="#termsModal">terminos y condiciones</a></label>
+            <input type="checkbox" name="terms" required />
+         </div>
+         <input type="submit" value="Ingresar" />
+      </form>
+      <p>¿Eres uno de los nuestros? <a href="/login" class="middletext-link">Ingresa a tu cuenta</a></p>
+   </div>
+</div>
+{% comment %} modal de bootstrap scrollable {% endcomment %}
+{% comment %} 
+         TODO: RELLENAR MODAL CON LOS TERMINOS Y CONDICIONES {% endcomment %}
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="termsModalLabel">Terminos y condiciones</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            {% lorem 9 b random %}
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock body %}

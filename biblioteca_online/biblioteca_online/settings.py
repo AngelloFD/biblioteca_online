@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+u&z487po698cbt(jzz81deb-v3(q5kabate5b0#ew!55$!3cy'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Aplicaciones propias
+    'usuario',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -79,8 +85,7 @@ DATABASES = {
         "NAME": "biblioteca",
         "USER": "",
         "PASSWORD": "",
-        # TODO: ENV FILE CON NOMBRE DE HOST PARA EVITAR PROBLEMAS ENTRE TESTEOS
-        "HOST": "DESKTOP-880HDV9\SQLEXPRESS",
+        "HOST": os.getenv("DB_HOST"),
         "PORT": "",
         "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server",}, 
     }
@@ -128,3 +133,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+LOGIN_REDIRECT_URL = '/bibliotinka'
+LOGOUT_REDIRECT_URL = '/login'
