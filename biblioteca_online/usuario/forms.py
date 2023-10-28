@@ -3,7 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class LoginForm(forms.Form):
-   email = forms.EmailField(required=True)
+   # email = forms.EmailField(required=True)
+   username = forms.CharField(required=True)
    password = forms.CharField(required=True, widget=forms.PasswordInput())
 
 class RegisterForm(UserCreationForm):

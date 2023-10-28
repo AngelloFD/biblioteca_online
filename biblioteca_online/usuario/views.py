@@ -20,13 +20,13 @@ def login_user(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('email')
+            username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(email=email, password=password)
+            user = authenticate(username=username, password=password)
             print(user)
             if user:
                 login(request,user)
-                return redirect('core:main')
+                return redirect('core:frontendmain')
             else:
                 messages.error(request, 'Usuario o contraseña incorrectos')
                 return render(request,'registration/login.html', {'form' : form})
@@ -47,7 +47,7 @@ def register(request):
             user = authenticate(username=user.username, password=raw_password)
             if user:
                 login(request,user)
-                return redirect('core:main')
+                return redirect('core:frontendmain')
     else:
         form = RegisterForm()
     return render(request,'registration/sign_up.html',{'form':form})
