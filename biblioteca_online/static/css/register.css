@@ -62,10 +62,10 @@ body {
 	font-weight: 600;
 	cursor: pointer;
 }
-.form-container input[type="email"], .form-container input[type="password"] {
+.form-container input[type="email"], .form-container input[type="password"], .form-container input[type="text"] {
 	border: 1px solid #E5E5E5;
 	border-radius: 5px;
-	padding: 0;
+	padding: 2%;
 	padding-top: 2%;
 	padding-bottom: 2%;
 }

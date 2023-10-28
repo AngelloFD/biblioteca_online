@@ -1,35 +1,53 @@
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
+from .models import Usuario
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
+def update_user_data(user):
+    Usuario.objects.filter(user=user).update(
+        dni=user.dni,
+        fecha_nacimiento=user.fecha_nacimiento,
+        compuesto=user.compuesto,
+        fecha_actualizacion=user.fecha_actualizacion,
+    )
+
 def home_page(request):
     return render(request,'home.html')
 
 def login_user(request):
     if request.method == "POST":
-        email = request.POST["email"]
-        password = request.POST["password"]
-        user = authenticate(request, email=email, password=password)
-        if user:
-            login(request,user)
-            return redirect('/bibliotinka')
-        else:
-            messages.error(request, 'Usuario o contraseña incorrectos')
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            user = authenticate(email=email, password=password)
+            print(user)
+            if user:
+                login(request,user)
+                return redirect('core:main')
+            else:
+                messages.error(request, 'Usuario o contraseña incorrectos')
+                return render(request,'registration/login.html', {'form' : form})
     else:
-        return render(request,'login.html')
-
-def logout_user(request):
-    pass
+        form = LoginForm()
+        return render(request,'registration/login.html', {'form' : form})
 
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
-            return redirect('/bibliotinka')
+            user.refresh_from_db()
+            
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+
+            user = authenticate(username=user.username, password=raw_password)
+            if user:
+                login(request,user)
+                return redirect('core:main')
     else:
         form = RegisterForm()
     return render(request,'registration/sign_up.html',{'form':form})

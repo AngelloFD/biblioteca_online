@@ -14,7 +14,7 @@
       {% comment %} 
       TODO: ACTION DIRIJE A LOGIN
       TODO: username {% endcomment %}
-      <form method="POST" action="/bibliotinka">
+      <form method="POST">
          {% csrf_token %}
          <label>Username</label><br>
          <input type="text" name="username" placeholder="Ingrese su username" required /><br>
@@ -25,7 +25,7 @@
          <label>Repita su contraseña</label><br>
          <input type="password" name="password2" placeholder="Contraseña" required /><br>
          <div class="terms-checkbox-container">
-            <label>Acepto los <a href="/register" class="middletext-link" data-bs-toggle="modal" data-bs-target="#termsModal">terminos y condiciones</a></label>
+            <label>Acepto los <a class="middletext-link" data-bs-toggle="modal" data-bs-target="#termsModal">terminos y condiciones</a></label>
             <input type="checkbox" name="terms" required />
          </div>
          <input type="submit" value="Ingresar" />
