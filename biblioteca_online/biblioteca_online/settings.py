@@ -67,6 +67,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.csrf',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -83,11 +84,11 @@ WSGI_APPLICATION = 'biblioteca_online.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        "NAME": "biblioteca",
-        "USER": "",
-        "PASSWORD": "",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
-        "PORT": "",
+        "PORT": os.getenv("DB_PORT"),
         "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server",}, 
     }
 }

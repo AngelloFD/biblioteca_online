@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('', include('usuario.urls')),
     path('', include('bibliotecario.urls')),
+    path('', include('core.urls')),
 ]
