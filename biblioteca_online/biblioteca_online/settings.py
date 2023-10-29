@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Aplicaciones propias
     'usuario',
     'core',
+    'bibliotecario',
 ]
 
 MIDDLEWARE = [
