@@ -62,12 +62,17 @@ body {
 	font-weight: 600;
 	cursor: pointer;
 }
-.form-container input[type="email"], .form-container input[type="password"] {
+.form-container input[type="text"], .form-container input[type="password"] {
 	border: 1px solid #E5E5E5;
 	border-radius: 5px;
 	padding: 0;
 	padding-top: 2%;
 	padding-bottom: 2%;
+}
+
+.middletext-link {
+	color: #FEAF00;
+	cursor: pointer;
 }
 
 /* TODO: RESPONSIVE */
