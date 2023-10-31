@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Prestamos</title>
+{% extends "templates-base/core-base.html" %}
 
-  <!-- Enlaces a los archivos CSS de Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-  <!-- Otros estilos CSS personalizados, si los tienes -->
-  <!-- Fonts and icons -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- CSS Files -->
-  <link type="text/css" href="../static/css/bootstrap.min.css" rel="stylesheet" />
-  <link type="text/css" href="../static/css/now-ui-dashboard.css" rel="stylesheet" />
-</head>
-<body>
-
+{% block bodycontent %}
   <!-- Barra de navegación de Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Prestamos</a>
@@ -35,7 +18,7 @@
   </nav>
 
   <!-- Contenido principal de la página -->
-<div class="container">
+  <div class="container">
     <h1>Sección de Préstamos</h1>
   
     <!-- Formulario para solicitar un préstamo -->
@@ -84,9 +67,4 @@
       </div>
     </div>
   </div>
-
-  <!-- Scripts de Bootstrap y jQuery (asegúrate de incluir jQuery) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% endblock bodycontent %}

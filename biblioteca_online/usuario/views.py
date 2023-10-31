@@ -15,7 +15,7 @@ def update_user_data(user):
     )
 
 def home_page(request):
-    return render(request,'home.html')
+    return render(request,'usuario/home.html')
 
 def login_user(request):
     if request.method == "POST":
@@ -30,10 +30,10 @@ def login_user(request):
                 return redirect('core:frontendmain')
             else:
                 messages.error(request, 'Usuario o contraseña incorrectos')
-                return render(request,'registration/login.html', {'form' : form})
+                return render(request,'usuario/registration/login.html', {'form' : form})
     else:
         form = LoginForm()
-        return render(request,'registration/login.html', {'form' : form})
+        return render(request,'usuario/registration/login.html', {'form' : form})
 
 def register(request):
     if request.method == 'POST':
@@ -51,4 +51,4 @@ def register(request):
                 return redirect('core:frontendmain')
     else:
         form = RegisterForm()
-    return render(request,'registration/sign_up.html',{'form':form})
+    return render(request,'usuario/registration/sign_up.html',{'form':form})
