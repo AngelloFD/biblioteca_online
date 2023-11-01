@@ -45,6 +45,14 @@
   </div>
 <!-- Header-->
 <header class="bg-light py-5 ">
+    {% if user.is_authenticated %}
+    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+        Bienvenido de vuelta <strong>{{user}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {%endif%}
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-dark">
             <h1 class="display-4 fw-bolder">Bibliotinka</h1>

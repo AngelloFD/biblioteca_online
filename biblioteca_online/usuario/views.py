@@ -23,16 +23,15 @@ def login_user(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            print(user)
             if user:
                 login(request,user)
                 print(user)
                 return redirect('core:frontendmain')
             else:
-                messages.error(request, 'Usuario o contraseña incorrectos')
+                messages.success(request, 'Usuario o contraseña incorrectos')
                 return render(request,'usuario/registration/login.html', {'form' : form})
         else:
-            print(form.errors)
+            messages.success(request, f'{form.errors}')
     else:
         form = LoginForm()
         print(form.errors)
@@ -54,7 +53,7 @@ def register(request):
                 print(user)
                 return redirect('core:frontendmain')
         else:
-            print(form.errors)
+            messages.success(request, f'{form.errors}')
     else:
         form = RegisterForm()
     return render(request,'usuario/registration/sign_up.html',{'form':form})
