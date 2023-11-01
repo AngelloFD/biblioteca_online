@@ -5,3 +5,11 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+$(document).ready(function(){
+   $(".add-to-cart").click(function(){
+     var isbnLibro = $(this).data('isbn-libro');
+     $.get("/add_book/", {isbn_libro: isbnLibro}, function(data){
+       $(".badge").text(data.num_items);
+     });
+   });
+ });

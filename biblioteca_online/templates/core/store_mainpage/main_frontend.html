@@ -2,7 +2,10 @@
 {% load static %}
 {% block titletext %}Bibliotinka - Homepage{% endblock titletext %}
 {% block customcss %}<link href="\static\css\frontend_page.css" rel="stylesheet" />{% endblock customcss %}
-{% block customjs %}<script src="{% static 'js/tienda_frontendanimacion.js' %}"></script>{% endblock customjs %}
+{% block customjs %}
+<script src="{% static 'js/tienda_frontendanimacion.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{% endblock customjs %}
 
 {% block bodycontent %}
 <!-- Navigation-->
@@ -71,15 +74,13 @@
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center">
-                            {% comment %} 
-                            TODO: VARIABLE DE SESION INVESTIGAR PIPIPI {% endcomment %}
                             <a class="btn btn-outline-dark mb-1 mt-auto" href="{% url "core:bookdetailmain" %}">Detalle</a>
                             {% if ejemplar.numero_ejemplar == 0 %}
-                            <div class="text-center"><a class="btn btn-outline-danger mt-auto disabled" href="#">Sin stock</a></div>
-                            {% comment %} {% elif variable de sesion = en carrito %} {% endcomment %}
-                            {% comment %} <a class="btn btn-outline-dark mb-1 mt-auto disabled" href="#">Libro en bandeja</a> {% endcomment %}
+                                <div class="text-center"><a class="btn btn-outline-danger mt-auto disabled" href="#">Sin stock</a></div>
+                            {% elif ejemplar.libro.isbn in carrito %}
+                                <a class="btn btn-outline-dark mb-1 mt-auto disabled" href="#">Libro en bandeja</a>
                             {% else %}
-                            <a class="btn btn-outline-dark mb-1 mt-auto" href="{% url "core:bookdetailmain" %}">Añadir al carro</a>
+                                <a class="btn btn-outline-dark mb-1 mt-auto add-to-cart" data-isbn-libro="{{ ejemplar.libro.isbn }}">Añadir al carro</a>
                             {% endif %}
                         </div>
                     </div>

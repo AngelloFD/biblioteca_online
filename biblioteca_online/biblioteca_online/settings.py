@@ -55,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'biblioteca_online.urls'
@@ -94,6 +96,14 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+       'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -139,5 +149,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-LOGIN_REDIRECT_URL = 'core:main'
-LOGOUT_REDIRECT_URL = '/login'
+LOGIN_REDIRECT_URL = 'core:frontendmain'
+LOGOUT_REDIRECT_URL = 'usuario:user_login'
+
+SESSION_COOKIE_AGE = 600
+SESSION_COOKIE_SECURE = True
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 600
+CACHE_MIDDLEWARE_KEY_PREFIX = 'bib'

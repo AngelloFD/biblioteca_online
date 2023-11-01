@@ -1,6 +1,5 @@
 from .forms import RegisterForm, LoginForm
 from .models import Usuario
-import core
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
@@ -27,12 +26,16 @@ def login_user(request):
             print(user)
             if user:
                 login(request,user)
+                print(user)
                 return redirect('core:frontendmain')
             else:
                 messages.error(request, 'Usuario o contraseña incorrectos')
                 return render(request,'usuario/registration/login.html', {'form' : form})
+        else:
+            print(form.errors)
     else:
         form = LoginForm()
+        print(form.errors)
         return render(request,'usuario/registration/login.html', {'form' : form})
 
 def register(request):
@@ -48,7 +51,10 @@ def register(request):
             user = authenticate(username=user.username, password=raw_password)
             if user:
                 login(request,user)
+                print(user)
                 return redirect('core:frontendmain')
+        else:
+            print(form.errors)
     else:
         form = RegisterForm()
     return render(request,'usuario/registration/sign_up.html',{'form':form})
