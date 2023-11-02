@@ -5,7 +5,6 @@ class Ejemplares(models.Model):
    id_ejemplar = models.CharField(max_length=100, primary_key=True, unique=True, null=False, blank=False)
    libro = models.ForeignKey('core.Libro', on_delete=models.CASCADE)
    estado = models.ForeignKey('core.Estado', on_delete=models.CASCADE)
-   numero_ejemplar = models.IntegerField(null=False, blank=False)
    resumen = models.CharField(max_length=1000, null=False, blank=False)
    compuesto = models.CharField(max_length=20, null=False, blank=False)
 

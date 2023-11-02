@@ -105,7 +105,7 @@
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center">
                             <a class="btn btn-outline-dark mb-1 mt-auto" href="{% url "core:bookdetailmain" %}">Detalle</a>
-                            {% if ejemplar.numero_ejemplar == 0 %}
+                            {% if ejemplares_count[ejemplar.libro.isbn] == 0 %}
                                 <div class="text-center"><a class="btn btn-outline-danger mt-auto disabled" href="#">Sin stock</a></div>
                             {% elif ejemplar.libro.isbn in carrito %}
                                 <a class="btn btn-outline-dark mb-1 mt-auto disabled" href="#">Libro en bandeja</a>
