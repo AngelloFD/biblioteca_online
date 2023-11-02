@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from prestamos.models import Ejemplares
-
 # Create your views here.
 def main_frontend(request):
    ejemplares = Ejemplares.objects.all()

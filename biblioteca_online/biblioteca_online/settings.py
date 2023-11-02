@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 ROOT_URLCONF = 'biblioteca_online.urls'
@@ -88,10 +89,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
+        #"USER": os.getenv("DB_USER"),
+        #"PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+        #"PORT": os.getenv("DB_PORT"),
         "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server",}, 
     }
 }
@@ -150,7 +151,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 LOGIN_REDIRECT_URL = 'core:frontendmain'
-LOGOUT_REDIRECT_URL = 'usuario:user_login'
+LOGOUT_REDIRECT_URL = 'usuario:usuario:welcome_page'
 
 SESSION_COOKIE_AGE = 600
 SESSION_COOKIE_SECURE = True

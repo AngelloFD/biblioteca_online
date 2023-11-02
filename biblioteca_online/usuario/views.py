@@ -2,7 +2,10 @@ from .forms import RegisterForm, LoginForm
 from .models import Usuario
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+# @ensure_csrf_cookie -> fuerza que se actualice el csrf token
 
 # Create your views here.
 def update_user_data(user):
@@ -16,6 +19,7 @@ def update_user_data(user):
 def home_page(request):
     return render(request,'usuario/home.html')
 
+@ensure_csrf_cookie
 def login_user(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -36,7 +40,8 @@ def login_user(request):
         form = LoginForm()
         print(form.errors)
         return render(request,'usuario/registration/login.html', {'form' : form})
-
+    
+@ensure_csrf_cookie 
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -57,3 +62,8 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request,'usuario/registration/sign_up.html',{'form':form})
+
+def logout_user(request):
+    request.session.flush()
+    logout(request)
+    return redirect('usuario:welcome_page')

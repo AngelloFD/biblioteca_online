@@ -1,10 +1,9 @@
 {% extends "templates-base/core-base.html" %}
 {% load static %}
 {% block titletext %}Bibliotinka - Homepage{% endblock titletext %}
-{% block customcss %}<link href="\static\css\frontend_page.css" rel="stylesheet" />{% endblock customcss %}
+{% block customcss %}{% endblock customcss %} 
 {% block customjs %}
 <script src="{% static 'js/tienda_frontendanimacion.js' %}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 {% endblock customjs %}
 
 {% block bodycontent %}
@@ -24,12 +23,25 @@
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>
+                </li> 
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                     <i class="bi-cart-fill me-1"></i><span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
+            {% if user.is_authenticated %}
+                <div class="nav-item dropdown px-4">
+                    <a class="nav-link text-dark dropdown-toggle" id="navbarDropdown"  role="button" data-bs-toggle="dropdown" aria-expanded="false">{{user}}</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Configuración</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/logingout">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="nav-item px-4"><a class="nav-link active text-dark" aria-current="page" href="/login">Iniciar sesión</a></div>
+            {%endif%}
         </div>
     </div>
 </nav>
@@ -46,12 +58,22 @@
 <!-- Header-->
 <header class="bg-light py-5 ">
     {% if user.is_authenticated %}
-    <div class="alert alert-dark alert-dismissible fade show" role="alert">
-        Bienvenido de vuelta <strong>{{user}}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+   <div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img src="https://www.iconsdb.com/icons/preview/royal-blue/info-xxl.png" class="rounded me-2" width="24" 
+            height="24">
+            <strong class="me-auto">Bibliotinka</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Bienvenido de vuelta, <strong>{{user}}</strong>
+          </div>
+        </div>
       </div>
+      
+    </div>
     {%endif%}
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-dark">
@@ -65,6 +87,7 @@
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% comment %} inicio de carta {% endcomment %}
+            {%if ejemplares%}
             {% for ejemplar in ejemplares %}
             <div class="col mb-5">
                 <div class="card h-100">
@@ -95,12 +118,24 @@
                 </div>
             </div>
             {% endfor %}
+            {%else%}
+            <div class="text-center">
+                <div class="empty-img"><img src="https://component.gallery/static/8d36eaa25b6dcb026685101ebc379022/Empty%20state%20icon..svg" height="128" alt="..." />
+                </div>
+                <div class="text-center text-dark">
+                    <h1 class="h1 fw-bolder">¡Oops! Aquí no hay nada.</h1>
+                    <p class="lead fw-normal text-dark mb-0">Puede ser que alguien se olvidó de agregar ejemplares para los libros.</p>
+                </div>
+              </div>
+            {%endif%}
             {% comment %} fin de carta {% endcomment %}
         </div>
     </div>
 </section>
 <!-- Footer-->
-<footer class="py-auto m-0 bg-dark">
-    <div class="container"><p class="m-0 text-left text-white">Copyright &copy; Bibliotinka 2023</p></div>
+<footer class="navbar fixed-bottom bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white"><p class="m-0 text-left">Copyright &copy; Bibliotinka 2023</a>
+      </div>
 </footer>
 {% endblock bodycontent %}
