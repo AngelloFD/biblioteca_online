@@ -59,20 +59,19 @@
 <header class="bg-light py-5 ">
     {% if user.is_authenticated %}
    <div aria-live="polite" aria-atomic="true" class="position-relative">
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <img src="https://www.iconsdb.com/icons/preview/royal-blue/info-xxl.png" class="rounded me-2" width="24" 
-            height="24">
-            <strong class="me-auto">Bibliotinka</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            Bienvenido de vuelta, <strong>{{user}}</strong>
-          </div>
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="https://www.iconsdb.com/icons/preview/royal-blue/info-xxl.png" class="rounded me-2" width="24" 
+                    height="24">
+                    <strong class="me-auto">Bibliotinka</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                    <div class="toast-body">
+                    Bienvenido de vuelta, <strong>{{user}}</strong>
+                    </div>
+            </div>
         </div>
-      </div>
-      
     </div>
     {%endif%}
     <div class="container px-4 px-lg-5 my-5">

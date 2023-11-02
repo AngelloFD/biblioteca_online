@@ -21,6 +21,7 @@ def home_page(request):
 
 @ensure_csrf_cookie
 def login_user(request):
+   # TO-DO: Investigar si sería necesario forzar un logout aquí
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -29,7 +30,6 @@ def login_user(request):
             user = authenticate(username=username, password=password)
             if user:
                 login(request,user)
-                print(user)
                 return redirect('core:frontendmain')
             else:
                 messages.success(request, 'Usuario o contraseña incorrectos')
@@ -55,7 +55,6 @@ def register(request):
             user = authenticate(username=user.username, password=raw_password)
             if user:
                 login(request,user)
-                print(user)
                 return redirect('core:frontendmain')
         else:
             messages.success(request, f'{form.errors}')
