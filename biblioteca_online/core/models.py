@@ -26,7 +26,7 @@ class Estado(models.Model):
    nombre = models.CharField(max_length=20, null=False, blank=False)
 
    def __str__(self):
-      return str(self.id_estado) + self.nombre
+      return str(self.id_estado) +" "+ self.nombre
 
 class ReclamoUsuario(models.Model):
    id_reclamo = models.CharField(max_length=80, primary_key=True, unique=True, null=False, blank=False)
