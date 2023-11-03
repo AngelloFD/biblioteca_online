@@ -5,7 +5,7 @@
 {% block customjs %}
 <script src="{% static 'js/tienda_frontendanimacion.js' %}"></script>
 {% endblock customjs %}
-
+{% load dictionary_tag %}
 {% block bodycontent %}
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -86,31 +86,31 @@
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% comment %} inicio de carta {% endcomment %}
-            {%if ejemplares%}
-            {% for ejemplar in ejemplares %}
+            {%if libros%}
+            {% for libro in libros %}
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top" src="{{ ejemplar.libro.image }}" alt="{{ ejemplar.libro.title }}" />
+                    <img class="card-img-top" src="{{ libro.image }}" alt="{{ libro.title }}" />
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder">{{ ejemplar.libro.title }}</h5>
+                            <h5 class="fw-bolder">{{ libro.title }}</h5>
                             <!-- Product price-->
-                            {{ ejemplar.libro.author }}
+                            {{ libro.author }}
                         </div>
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center">
                             <a class="btn btn-outline-dark mb-1 mt-auto" href="{% url "core:bookdetailmain" %}">Detalle</a>
-                            {% if ejemplares_count[ejemplar.libro.isbn] == 0 %}
-                                <div class="text-center"><a class="btn btn-outline-danger mt-auto disabled" href="#">Sin stock</a></div>
-                            {% elif ejemplar.libro.isbn in carrito %}
+                            {% if ejemplares_count|get_item:libro.isbn == 0 %}
+                                <a class="btn btn-outline-danger mt-auto disabled">Sin stock</a>
+                            {% elif libro in carrito %}
                                 <a class="btn btn-outline-dark mb-1 mt-auto disabled" href="#">Libro en bandeja</a>
                             {% else %}
-                                <a class="btn btn-outline-dark mb-1 mt-auto add-to-cart" data-isbn-libro="{{ ejemplar.libro.isbn }}">Añadir al carro</a>
+                                <a class="btn btn-outline-dark mb-1 mt-auto add-to-cart" data-isbn-libro="{{ libro.isbn }}">Añadir al carro</a>
                             {% endif %}
                         </div>
                     </div>
