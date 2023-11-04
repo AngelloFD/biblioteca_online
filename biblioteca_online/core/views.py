@@ -10,8 +10,6 @@ def main_frontend(request):
     ejemplares_count = {
         libro.isbn: Ejemplares.objects.filter(libro=libro,estado="1").count() for libro in libros
     }
-    for libro in libros:
-        print(ejemplares_count[libro.isbn])
     if "carrito" not in request.session:
         request.session["carrito"] = []
     context = {
