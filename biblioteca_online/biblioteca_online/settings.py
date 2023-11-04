@@ -76,8 +76,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries':{
-            'dictionary_tag': 'prestamos.template_tags.dictionary_get',
-
+                'dictionary_tag': 'prestamos.template_tags.dictionary_get',
+                'book_tag': 'core.templates_tags.books_filter.py'
             }
         },
     },
