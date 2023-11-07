@@ -4,10 +4,28 @@
 {% block customcss %}{% endblock customcss %} 
 {% block customjs %}
 <script src="{% static 'js/tienda_frontendanimacion.js' %}"></script>
+<script src = {% static 'js/plugins/automodal.js' %}></script>
 {% endblock customjs %}
 {% load dictionary_tag %}
 {% block bodycontent %}
 <!-- Navigation-->
+<div class="modal fade" id="dnimodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="#!">Bibliotinka</a>

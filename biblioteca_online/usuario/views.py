@@ -8,13 +8,6 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 # @ensure_csrf_cookie -> fuerza que se actualice el csrf token
 
 # Create your views here.
-def update_user_data(user):
-    Usuario.objects.filter(user=user).update(
-        dni=user.dni,
-        fecha_nacimiento=user.fecha_nacimiento,
-        compuesto=user.compuesto,
-        fecha_actualizacion=user.fecha_actualizacion,
-    )
 
 def home_page(request):
     return render(request,'usuario/home.html')
@@ -63,6 +56,6 @@ def register(request):
     return render(request,'usuario/registration/sign_up.html',{'form':form})
 
 def logout_user(request):
-    request.session.flush()
+    request.session.flush() # Es necesario?
     logout(request)
     return redirect('usuario:welcome_page')
