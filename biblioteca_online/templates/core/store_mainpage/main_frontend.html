@@ -3,86 +3,34 @@
 {% block titletext %}Bibliotinka - Homepage{% endblock titletext %}
 {% block customcss %}{% endblock customcss %} 
 {% block customjs %}
-<script src="{% static 'js/tienda_frontendanimacion.js' %}"></script>
+<script src="{% static 'js/bandeja_add.js' %}"></script>
 <script src = {% static 'js/plugins/automodal.js' %}></script>
 {% endblock customjs %}
 {% load dictionary_tag %}
 {% block bodycontent %}
-<!-- Navigation-->
+
+{% if user.is_authenticated and not dni_check %}
 <div class="modal fade" id="dnimodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Bienvenido a Bibliotinka</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+        Nos da gusto que te hayas unido, <strong>{{user}}</strong>,<br>
+        nos hemos dado cuenta que no tienes tu DNI registrado,<br>
+        para usar nuestros servicios necesitas un <strong>DNI registrado.</strong>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Ir a configuración</button>
         </div>
       </div>
     </div>
   </div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#!">Bibliotinka</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                <li class="nav-item"><a style="width: 5px;" ></a></li>
-                    <li class="nav-item">
-                        <form class="form-inline d-flex">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 300px;">
-                            <div style="width: 5px;"> </div>
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </li>
-                </li> 
-            </ul>
-            <form class="d-flex">
-                <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                    <i class="bi-cart-fill me-1"></i><span class="badge bg-dark text-white ms-1 rounded-pill">{{carrito|length}}</span>
-                </button>
-            </form>
-            {% if user.is_authenticated %}
-                <div class="nav-item dropdown px-4">
-                    <a class="nav-link text-dark dropdown-toggle" id="navbarDropdown"  role="button" data-bs-toggle="dropdown" aria-expanded="false">{{user}}</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Configuración</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="/logingout">Cerrar sesión</a></li>
-                    </ul>
-                </div>
-            {% else %}
-                <div class="nav-item px-4"><a class="nav-link active text-dark" aria-current="page" href="/login">Iniciar sesión</a></div>
-            {%endif%}
-        </div>
-    </div>
-</nav>
-{% comment %} Off Canvas {% endcomment %}
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Tus pedidos</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        {% comment %} Puede haber una plantilla que recien aparezca cuando se agrege un libro {% endcomment %}
-        {% if carrito|length == 0%}
-        <div class="text-center">
-            <div class="empty-img"><img src="https://component.gallery/static/8d36eaa25b6dcb026685101ebc379022/Empty%20state%20icon..svg" height="128" alt="..." />
-            </div>
-            <div class="text-center text-dark">
-                <h1 class="h1 fw-bolder">¡Oops! Aquí no hay nada.</h1>
-                <p class="lead fw-normal text-dark mb-0">Intenta agregar un libro.</p>
-            </div>
-        </div>
-        {%endif%}
-    </div>
-  </div>
+{%endif%}
+
 <!-- Header-->
 <header class="bg-light py-5 ">
     {% if user.is_authenticated %}
@@ -132,7 +80,7 @@
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center">
-                            <a class="btn btn-outline-dark mb-1 mt-auto" href="{% url "core:bookdetailmain" %}">Detalle</a>
+                            <a class="btn btn-outline-dark mb-1 mt-auto" href="{% url "core:bookdetailmain" libro.isbn %}">Detalle</a>
                             {% if ejemplares_count|get_item:libro.isbn == 0 %}
                                 <a class="btn btn-outline-danger mt-auto disabled">Sin stock</a>
                             {% elif libro.isbn in carrito %}
@@ -151,7 +99,7 @@
                 </div>
                 <div class="text-center text-dark">
                     <h1 class="h1 fw-bolder">¡Oops! Aquí no hay nada.</h1>
-                    <p class="lead fw-normal text-dark mb-0">Puede ser que alguien se olvidó de agregar ejemplares para los libros.</p>
+                    <p class="lead fw-normal text-dark mb-0">Eliga los libros que desea.</p>
                 </div>
               </div>
             {%endif%}

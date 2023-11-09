@@ -1,4 +1,11 @@
-from core.coredalc.librodalc import get_book_by_ispn
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from core.coredalc.librodalc import DALC_getbookbyisbn
 
-def get_book_ispn(ispn):
-    return get_book_by_ispn(ispn)
+def DB_GetBookbyISBN(isbn):
+    try:
+        libro = DALC_getbookbyisbn(isbn)
+        return libro
+    except ObjectDoesNotExist:
+         raise f"Error en DALC_GetusuariobyUser -> {ObjectDoesNotExist}"
+    except MultipleObjectsReturned:
+        raise f"Error en DALC_GetusuariobyUser -> {MultipleObjectsReturned}"

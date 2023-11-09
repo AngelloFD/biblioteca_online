@@ -157,8 +157,9 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 LOGIN_REDIRECT_URL = 'core:frontendmain'
 LOGOUT_REDIRECT_URL = 'usuario:usuario:welcome_page'
 
-SESSION_COOKIE_AGE = 600
+SESSION_COOKIE_AGE = 2592000 # 30 días
 SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_HTTPONLY = True  preguntar al profesor si es recomendable esto
 
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 600

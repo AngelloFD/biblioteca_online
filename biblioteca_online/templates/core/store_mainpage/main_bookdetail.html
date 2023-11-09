@@ -3,64 +3,28 @@
 {% block titletext %}Bibliotinka - Detalle{% endblock titletext %}
 {% block customcss %}{% endblock customcss %} 
 {% block customjs %}
-<script src="{% static 'js/tienda_detallelibromain.js' %}"></script>
+<script src="{% static 'js/bandeja_add.js' %}"></script>
 {% endblock customjs %}
 {% load dictionary_tag %}
 {% block bodycontent %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#!">Bibliotinka</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                <li class="nav-item"><a style="width: 5px;" ></a></li>
-                    <li class="nav-item">
-                        <form class="form-inline d-flex">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 300px;">
-                            <div style="width: 5px;"> </div>
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </li>
-                </li> 
-            </ul>
-            <form class="d-flex">
-                <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                    <i class="bi-cart-fill me-1"></i><span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                </button>
-            </form>
-            {% if user.is_authenticated %}
-                <div class="nav-item dropdown px-4">
-                    <a class="nav-link text-dark dropdown-toggle" id="navbarDropdown"  role="button" data-bs-toggle="dropdown" aria-expanded="false">{{user}}</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Configuración</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="/logingout">Cerrar sesión</a></li>
-                    </ul>
-                </div>
-            {% else %}
-                <div class="nav-item px-4"><a class="nav-link active text-dark" aria-current="page" href="/login">Iniciar sesión</a></div>
-            {%endif%}
-        </div>
-    </div>
-</nav>
 <!-- Product section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0" src="http://s.s-bol.com/imgbase0/imagebase/large/FC/5/3/6/6/1001004011806635.jpg" alt="..." style="width: 500px; height: 700px;">
+                <img class="card-img-top mb-5 mb-md-0" src={{libro.image}} alt="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png" style="width: 500px; height: 700px;">
             </div>
             <div class="col-md-6">
-                <div class="small mb-1">ISBN: 9789000307975</div>
-                <h1 class="display-5 fw-bolder">Vrienden voor het leven</h1>    
-                <p class="lead">Vrienden voor het leven is het verhaal van drie vriendinnen die op weg naar volwassenheid verwikkeld raken in een zonderlinge driehoeksverhouding. Benny en Eve, boezemvriendinnen uit het Ierse dorpje Knockglen, gaan in Dublin studeren en sluiten daar al snel vriendschap met de aantrekkelijke en ambitieuze Nan. Het opwindende studentenleven brengt hun echter niet alleen geluk maar ook verdriet. Met haar grote vermogen om menselijke gevoelens herkenbaar neer te zetten weet Maeve Binchy geluk en verdriet, warmte en humor samen te brengen in deze meeslepende roman. Vrienden voor het leven verscheen voor het eerst in 1991 en is het favoriete boek van vele Maeve Binchy-fans. Het boek is inmiddels toe aan de zeventiende druk. In 1995 werd het zeer succesvol verfilmd onder de titel Circle of Friends met Minnie Driver en Chris O’Donnell in de hoofdrollen.</p>
-                <div class="d-flex">
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        Añadir a bandeja
-                    </button>
-                </div>
+                <div class="small mb-1">ISBN: {{libro.isbn}}</div>
+                <h1 class="display-5 fw-bolder">{{libro.title}}</h1>    
+                <p class="lead">{{libro.summary}}</p>
+                {% if ejemplares_count|get_item:libro.isbn == 0 %}
+                    <a class="btn btn-outline-danger mt-auto disabled">Sin stock</a>
+                {% elif libro.isbn in carrito %}
+                    <a class="btn btn-outline-primary mb-1 mt-auto disabled">Libro en bandeja</a>
+                {% else %}
+                    <a class="btn btn-outline-dark mb-1 mt-auto add-to-cart" data-isbn-libro="{{ libro.isbn }}">Añadir al carro</a>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -1,14 +1,21 @@
 from usuario.models import Usuario,User
 from django.db import DatabaseError
-from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
-def DALC_GetusuariobyUser(user:User)->Usuario:
-    Usuario(usuario)
-    usuario = Usuario.objects.filter(user=user)
-    return usuario
+def DALC_GetusuariobyUser(users:User)->Usuario:
+    try:
+        usuario:Usuario
+        usuario = Usuario.objects.get(user=users)
+        print(f"Usuario en DALC -> {usuario}")
+        return usuario
+    except ObjectDoesNotExist:
+        raise f"Error en DALC_GetusuariobyUser -> {ObjectDoesNotExist}"
+    except MultipleObjectsReturned:
+        raise f"Error en DALC_GetusuariobyUser -> {MultipleObjectsReturned}"
 
 def DALC_CheckUsuarioDNI(usuario:Usuario)->bool:
-    return usuario.dni is None 
+        return usuario.dni is not None 
+    
 
 #TO-DO: Angello revisa porfavor
 def DALC_Updateusuariodata(user):
