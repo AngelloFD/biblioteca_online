@@ -6,7 +6,6 @@ def DALC_GetusuariobyUser(users:User)->Usuario:
     try:
         usuario:Usuario
         usuario = Usuario.objects.get(user=users)
-        print(f"Usuario en DALC -> {usuario}")
         return usuario
     except ObjectDoesNotExist:
         raise f"Error en DALC_GetusuariobyUser -> {ObjectDoesNotExist}"

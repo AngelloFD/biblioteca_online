@@ -26,7 +26,6 @@ def main_frontend(request):
         "ejemplares_count": ejemplares_count,
         "dni_check": dni_check
     }
-    print(f"dni_check -> {dni_check}")
     return render(request, "core/store_mainpage/main_frontend.html", context)
 
 

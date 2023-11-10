@@ -1,5 +1,4 @@
 from .forms import RegisterForm, LoginForm
-from .models import Usuario
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
@@ -14,6 +13,8 @@ def home_page(request):
 
 @ensure_csrf_cookie
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('core:frontendmain')
    # TO-DO: Investigar si sería necesario forzar un logout aquí
     if request.method == "POST":
         form = LoginForm(request.POST)

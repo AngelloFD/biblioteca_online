@@ -58,6 +58,7 @@ MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'usuario.middleware.AutoLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'biblioteca_online.urls'
