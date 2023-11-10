@@ -1,0 +1,41 @@
+{% extends "templates-base/core-base.html" %}
+{% load static %}
+{% block bodycontent %}
+<body>
+    <!-- Barra de navegación de Bootstrap -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Biblioteca Online</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/libros">Lista de Libros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/agregar-libro">Agregar Libro</a>
+                </li>
+                <!-- Puedes agregar más enlaces de navegación según tus necesidades -->
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Agregar Libro</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary" value="Agregar Libro">
+        </form>
+    </div>
+
+    <!-- Agrega los enlaces a Bootstrap JS y jQuery al final del archivo -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+{% endblock bodycontent %}
