@@ -60,3 +60,9 @@ def logout_user(request):
     request.session.flush() # Es necesario?
     logout(request)
     return redirect('usuario:welcome_page')
+
+def conf_user(request):
+    if request.user.is_authenticated:
+        return render(request,'usuario/configuracion_usuario.html')
+    else:
+        return render(request, 'usuario/home.html')
