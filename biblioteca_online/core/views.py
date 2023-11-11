@@ -39,7 +39,7 @@ def add_book(request):
     carrito = request.session.get("carrito", [])
     carrito.append(isbn_libro)
     request.session["carrito"] = carrito
-    return JsonResponse({"num_items": len(carrito)})
+    return JsonResponse({"num_items": len(carrito), "in_cart": True})
 
 
 def bookdetail_frontend(request, isbn):
