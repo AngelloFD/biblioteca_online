@@ -1,4 +1,5 @@
-from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
+from django.http import HttpResponseNotFound, JsonResponse
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from core.utils.core_utils import CheckUserDNI
 from core.corebc.librobc import DB_GetBookbyISBN
@@ -9,7 +10,10 @@ from prestamos.models import Ejemplares
 # Create your views here.
 def main_frontend(request):
 
-    libros = Libro.objects.all()
+    libros = Libro.objects.all().order_by("isbn")
+    paginator = Paginator(libros, 5)
+    page_number = request.GET.get("page")
+    libros_pag = paginator.get_page(page_number)
     dni_check:bool 
     dni_check = False
     if request.user.is_authenticated:
@@ -24,7 +28,8 @@ def main_frontend(request):
         "libros": libros,
         "carrito": request.session["carrito"],
         "ejemplares_count": ejemplares_count,
-        "dni_check": dni_check
+        "dni_check": dni_check,
+        "libros_pag": libros_pag,
     }
     return render(request, "core/store_mainpage/main_frontend.html", context)
 

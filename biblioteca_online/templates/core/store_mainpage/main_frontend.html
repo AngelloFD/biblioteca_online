@@ -63,7 +63,7 @@
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% comment %} inicio de carta {% endcomment %}
             {%if libros%}
-            {% for libro in libros %}
+            {% for libro in libros_pag %}
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
@@ -104,6 +104,23 @@
               </div>
             {%endif%}
             {% comment %} fin de carta {% endcomment %}
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if libros_pag.has_previous %}
+                    <a class="btn btn-primary" href="?page=1">« first </a>
+                    <a class="btn btn-primary" href="?page={{ libros_pag.previous_page_number }}"> previous </a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ libros_pag.number }} of {{ libros_pag.paginator.num_pages }}.
+                </span>
+
+                {% if libros_pag.has_next %}
+                    <a class="btn btn-primary" href="?page={{ libros_pag.next_page_number }}"> next </a>
+                    <a class="btn btn-primary" href="?page={{ libros_pag.paginator.num_pages }}"> last »</a>
+                {% endif %}
+            </span>
         </div>
     </div>
 </section>
