@@ -9,9 +9,8 @@ from prestamos.models import Ejemplares
 
 # Create your views here.
 def main_frontend(request):
-
     libros = Libro.objects.all().order_by("isbn")
-    paginator = Paginator(libros, 5)
+    paginator = Paginator(libros, 8)
     page_number = request.GET.get("page")
     libros_pag = paginator.get_page(page_number)
     dni_check:bool 
@@ -35,11 +34,30 @@ def main_frontend(request):
 
 
 def add_book(request):
-    isbn_libro = request.GET.get("isbn")
+    isbn_libro = request.GET.get("isbn_libro")
+    print(f"Dato a agregar: {isbn_libro}")
     carrito = request.session.get("carrito", [])
     carrito.append(isbn_libro)
     request.session["carrito"] = carrito
     return JsonResponse({"num_items": len(carrito), "in_cart": True})
+
+def eliminar_libro(request):
+    isbn_libro = request.POST.get('isbn_libro')
+    print(f"Dato a eliminar: {isbn_libro}")
+    carrito = request.session.get('carrito', [])
+    carrito = [item for item in carrito if item['isbn'] != isbn_libro]
+    request.session['carrito'] = carrito
+    return JsonResponse({'success': True})
+
+def print_carrito(request, timestamp):
+    carrito = request.session.get("carrito", [])
+    lista:list
+    lista = []
+    for item in carrito:
+        libro:Libro
+        libro = DB_GetBookbyISBN(item)
+        lista.append({'isbn': libro.isbn, 'titulo': libro.title})
+    return JsonResponse({'carrito_detalle': lista})
 
 
 def bookdetail_frontend(request, isbn):

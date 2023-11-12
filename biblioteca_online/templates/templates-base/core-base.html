@@ -41,7 +41,7 @@
               </li> 
           </ul>
           <form class="d-flex">
-              <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+              <button id="actualizar_contenido_btn" class="btn btn-outline-dark " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                   <i class="bi-cart-fill me-1"></i><span class="badge bg-dark text-white ms-1 rounded-pill">{{carrito|length}}</span>
               </button>
           </form>
@@ -79,6 +79,18 @@
               <p class="lead fw-normal text-dark mb-0">Intenta agregar un libro.</p>
           </div>
       </div>
+      {%else%}
+      <table class="table" id="carrito_table">
+        <thead>
+          <tr>
+            <th scope="col">ISBN</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
       {%endif%}
   </div>
 </div>

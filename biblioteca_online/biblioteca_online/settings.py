@@ -160,6 +160,8 @@ LOGOUT_REDIRECT_URL = 'usuario:usuario:welcome_page'
 
 SESSION_COOKIE_AGE = 2592000 # 30 días
 SESSION_COOKIE_SECURE = True
+SESSION_SAVE_EVERY_REQUEST = True
+
 #SESSION_COOKIE_HTTPONLY = True  preguntar al profesor si es recomendable esto
 
 CACHE_MIDDLEWARE_ALIAS = 'default'

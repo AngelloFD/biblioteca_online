@@ -104,7 +104,7 @@
                             {% if ejemplares_count|get_item:libro.isbn == 0 %}
                                 <a class="btn btn-outline-danger mt-auto disabled">Sin stock</a>
                             {% elif libro.isbn in carrito %}
-                                <a class="btn btn-outline-dark mb-1 mt-auto disabled" href="#">Libro en bandeja</a>
+                                <a class="btn btn-outline-primary mb-1 mt-auto disabled" href="#">Libro en bandeja</a>
                             {% else %}
                                 {% if user.is_authenticated %}
                                     <a class="btn btn-outline-dark mb-1 mt-auto add-to-cart" data-isbn-libro="{{ libro.isbn }}">Añadir al carro</a>

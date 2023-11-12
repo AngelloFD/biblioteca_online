@@ -3,6 +3,8 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 def DALC_getbookbyisbn(isbn) -> Libro:
     try:
+        if isbn == 0:
+            raise ObjectDoesNotExist
         libros:Libro
         libros = Libro.objects.get(isbn=isbn)
         return libros
