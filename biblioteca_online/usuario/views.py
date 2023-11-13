@@ -65,4 +65,5 @@ def conf_user(request):
     if request.user.is_authenticated:
         return render(request,'usuario/configuracion_usuario.html')
     else:
-        return render(request, 'usuario/home.html')
+        return render(request, 'usuario/login.html')
+
