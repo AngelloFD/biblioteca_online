@@ -1,39 +1,41 @@
 from .forms import RegisterForm, LoginForm
-from .models import Usuario
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+# @ensure_csrf_cookie -> fuerza que se actualice el csrf token
 
 # Create your views here.
-def update_user_data(user):
-    Usuario.objects.filter(user=user).update(
-        dni=user.dni,
-        fecha_nacimiento=user.fecha_nacimiento,
-        compuesto=user.compuesto,
-        fecha_actualizacion=user.fecha_actualizacion,
-    )
 
 def home_page(request):
-    return render(request,'home.html')
+    return render(request,'usuario/home.html')
 
+@ensure_csrf_cookie
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('core:frontendmain')
+   # TO-DO: Investigar si sería necesario forzar un logout aquí
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            print(user)
             if user:
                 login(request,user)
                 return redirect('core:frontendmain')
             else:
-                messages.error(request, 'Usuario o contraseña incorrectos')
-                return render(request,'registration/login.html', {'form' : form})
+                messages.success(request, 'Usuario o contraseña incorrectos')
+                return render(request,'usuario/registration/login.html', {'form' : form})
+        else:
+            messages.success(request, f'{form.errors}')
     else:
         form = LoginForm()
-        return render(request,'registration/login.html', {'form' : form})
-
+        print(form.errors)
+        return render(request,'usuario/registration/login.html', {'form' : form})
+    
+@ensure_csrf_cookie 
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -48,6 +50,20 @@ def register(request):
             if user:
                 login(request,user)
                 return redirect('core:frontendmain')
+        else:
+            messages.success(request, f'{form.errors}')
     else:
         form = RegisterForm()
-    return render(request,'registration/sign_up.html',{'form':form})
+    return render(request,'usuario/registration/sign_up.html',{'form':form})
+
+def logout_user(request):
+    request.session.flush() # Es necesario?
+    logout(request)
+    return redirect('usuario:welcome_page')
+
+def conf_user(request):
+    if request.user.is_authenticated:
+        return render(request,'usuario/configuracion_usuario.html')
+    else:
+        return render(request, 'usuario/login.html')
+

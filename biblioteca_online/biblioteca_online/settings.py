@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'usuario',
     'core',
     'bibliotecario',
+    'prestamos',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'usuario.middleware.AutoLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'biblioteca_online.urls'
@@ -67,9 +72,14 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.csrf',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'dictionary_tag': 'prestamos.template_tags.dictionary_get',
+                #'book_tag': 'core.template_tags.books_filter',
+            }
         },
     },
 ]
@@ -83,15 +93,23 @@ WSGI_APPLICATION = 'biblioteca_online.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        "NAME": "biblioteca",
-        "USER": "",
-        "PASSWORD": "",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
-        "PORT": "",
+        "PORT": os.getenv("DB_PORT"),
         "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server",}, 
     }
 }
 
+CACHES = {
+    'default': {
+       'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -129,11 +147,23 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-LOGIN_REDIRECT_URL = 'core:main'
-LOGOUT_REDIRECT_URL = '/login'
+LOGIN_REDIRECT_URL = 'core:frontendmain'
+LOGOUT_REDIRECT_URL = 'usuario:usuario:welcome_page'
+
+SESSION_COOKIE_AGE = 2592000 # 30 días
+SESSION_COOKIE_SECURE = True
+SESSION_SAVE_EVERY_REQUEST = True
+
+#SESSION_COOKIE_HTTPONLY = True  preguntar al profesor si es recomendable esto
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 600
+CACHE_MIDDLEWARE_KEY_PREFIX = 'bib'
