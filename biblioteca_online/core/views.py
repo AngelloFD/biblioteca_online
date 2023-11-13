@@ -9,17 +9,22 @@ from prestamos.models import Ejemplares
 
 # Create your views here.
 def main_frontend(request):
-    libros = Libro.objects.all().order_by("isbn")
+    query = request.GET.get("search")
+    if query:
+        libros = Libro.objects.filter(title__icontains=query).order_by("isbn")
+    else:
+        libros = Libro.objects.all().order_by("isbn")
     paginator = Paginator(libros, 8)
     page_number = request.GET.get("page")
     libros_pag = paginator.get_page(page_number)
-    dni_check:bool 
+    dni_check: bool
     dni_check = False
     if request.user.is_authenticated:
         dni_check = CheckUserDNI(request.user)
 
     ejemplares_count = {
-        libro.isbn: Ejemplares.objects.filter(libro=libro,estado="1").count() for libro in libros
+        libro.isbn: Ejemplares.objects.filter(libro=libro, estado="1").count()
+        for libro in libros
     }
     if "carrito" not in request.session:
         request.session["carrito"] = []
@@ -41,38 +46,40 @@ def add_book(request):
     request.session["carrito"] = carrito
     return JsonResponse({"num_items": len(carrito), "in_cart": True})
 
+
 def eliminar_libro(request):
-    isbn_libro = request.POST.get('isbn_libro')
+    isbn_libro = request.POST.get("isbn_libro")
     print(f"Dato a eliminar: {isbn_libro}")
-    carrito = request.session.get('carrito', [])
-    carrito = [item for item in carrito if item['isbn'] != isbn_libro]
-    request.session['carrito'] = carrito
-    return JsonResponse({'success': True})
+    carrito = request.session.get("carrito", [])
+    carrito = [item for item in carrito if item["isbn"] != isbn_libro]
+    request.session["carrito"] = carrito
+    return JsonResponse({"success": True})
+
 
 def print_carrito(request, timestamp):
     carrito = request.session.get("carrito", [])
-    lista:list
+    lista: list
     lista = []
     for item in carrito:
-        libro:Libro
+        libro: Libro
         libro = DB_GetBookbyISBN(item)
-        lista.append({'isbn': libro.isbn, 'titulo': libro.title})
-    return JsonResponse({'carrito_detalle': lista})
+        lista.append({"isbn": libro.isbn, "titulo": libro.title})
+    return JsonResponse({"carrito_detalle": lista})
 
 
 def bookdetail_frontend(request, isbn):
-    libro:Libro
+    libro: Libro
     libro = DB_GetBookbyISBN(isbn)
     if libro is None:
-        return HttpResponseNotFound("No se encontró el libro")  
-    
-    dni_check:bool 
+        return HttpResponseNotFound("No se encontró el libro")
+
+    dni_check: bool
     dni_check = False
     if request.user.is_authenticated:
         dni_check = CheckUserDNI(request.user)
 
     ejemplares_count = {
-        libro.isbn: Ejemplares.objects.filter(libro=libro,estado="1").count()
+        libro.isbn: Ejemplares.objects.filter(libro=libro, estado="1").count()
     }
     if "carrito" not in request.session:
         request.session["carrito"] = []

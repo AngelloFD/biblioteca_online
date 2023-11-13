@@ -1,37 +1,40 @@
-{% extends "templates-base/core-base.html" %}
+{% extends 'templates-base/core-base.html' %}
 {% load static %}
-{% block titletext %}Bibliotinka - Detalle{% endblock titletext %}
-{% block customcss %}{% endblock customcss %} 
+{% block titletext %}
+  Bibliotinka - Detalle
+{% endblock %}
+{% block customcss %}
+{% endblock %}
 {% block customjs %}
-<script src="{% static 'js/bandeja_add.js' %}"></script>
-{% endblock customjs %}
+  <script src="{% static 'js/bandeja_add.js' %}"></script>
+{% endblock %}
 {% load dictionary_tag %}
 {% block bodycontent %}
-<!-- Product section-->
-<section class="py-5">
+  <!-- Product section -->
+  <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0" src={{libro.image}} alt="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png">
-            </div>
-            <div class="col-md-6">
-                <div class="small mb-1">ISBN: {{libro.isbn}}</div>
-                <h1 class="display-5 fw-bolder">{{libro.title}}</h1>    
-                <p class="lead">{{libro.summary}}</p>
-                {% if ejemplares_count|get_item:libro.isbn == 0 %}
-                    <a class="btn btn-outline-danger mt-auto disabled">Sin stock</a>
-                {% elif libro.isbn in carrito %}
-                    <a class="btn btn-outline-primary mb-1 mt-auto disabled">Libro en bandeja</a>
-                {% else %}
-                    <a class="btn btn-outline-dark mb-1 mt-auto add-to-cart" data-isbn-libro="{{ libro.isbn }}">Añadir al carro</a>
-                {% endif %}
-            </div>
+      <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="col-md-6">
+          <img class="card-img-top mb-5 mb-md-0" src="{{ libro.image }}" alt="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png" />
         </div>
-    </div>
-</section>
-<footer class="navbar fixed-bottom bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white"><p class="m-0 text-left">Copyright &copy; Bibliotinka 2023</a>
+        <div class="col-md-6">
+          <div class="small mb-1">ISBN: {{ libro.isbn }}</div>
+          <h1 class="display-5 fw-bolder">{{ libro.title }}</h1>
+          <p class="lead">{{ libro.summary }}</p>
+          {% if ejemplares_count|get_item:libro.isbn == 0 %}
+            <a class="btn btn-outline-danger mt-auto disabled">Sin stock</a>
+          {% elif libro.isbn in carrito %}
+            <a class="btn btn-outline-primary mb-1 mt-auto disabled">Libro en bandeja</a>
+          {% else %}
+            <a class="btn btn-outline-dark mb-1 mt-auto add-to-cart" data-isbn-libro="{{ libro.isbn }}">Añadir al carro</a>
+          {% endif %}
+        </div>
       </div>
-</footer>
-{% endblock bodycontent %}
+    </div>
+  </section>
+  <footer class="navbar fixed-bottom bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white"><p class="m-0 text-left">Copyright &copy; Bibliotinka 2023</p></a>
+    </div>
+  </footer>
+{% endblock %}

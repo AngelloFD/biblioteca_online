@@ -1,157 +1,157 @@
-{% extends "templates-base/core-base.html" %}
+{% extends 'templates-base/core-base.html' %}
 {% load static %}
-{% block titletext %}Bibliotinka - Homepage{% endblock titletext %}
-{% block customcss %}{% endblock customcss %} 
+{% block titletext %}
+  Bibliotinka - Homepage
+{% endblock %}
+{% block customcss %}
+{% endblock %}
 {% block customjs %}
-<script src="{% static 'js/bandeja_add.js' %}"></script>
-<script src = {% static 'js/plugins/automodal.js' %}></script>
-{% endblock customjs %}
+  <script src="{% static 'js/bandeja_add.js' %}"></script>
+  <script src="{% static 'js/plugins/automodal.js' %}"></script>
+{% endblock %}
 {% load dictionary_tag %}
 {% block bodycontent %}
+  {% comment %}INICIO MODALS{% endcomment %}
+  {% if user.is_authenticated and not dni_check %}
+    <div class="modal fade" id="dnimodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Bienvenido a Bibliotinka</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Nos da gusto que te hayas unido, <strong>{{ user }}</strong>,<br />
+            nos hemos dado cuenta que no tienes tu DNI registrado,<br />
+            para usar nuestros servicios necesitas un <strong>DNI registrado.</strong>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Ir a configuración</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
 
-{% comment %} INICIO MODALS {% endcomment %}
-{% if user.is_authenticated and not dni_check %}
-<div class="modal fade" id="dnimodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="notlogprestmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Bienvenido a Bibliotinka</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">¿Interesado en este libro?</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        Nos da gusto que te hayas unido, <strong>{{user}}</strong>,<br>
-        nos hemos dado cuenta que no tienes tu DNI registrado,<br>
-        para usar nuestros servicios necesitas un <strong>DNI registrado.</strong>
+          <p>Si desea pedir el préstamo del libro, por favor, inicie sesión.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Ir a configuración</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguiré revisando</button>
+          <button type="button" class="btn btn-primary" onclick="location.href='{% url 'usuario:user_login' %}'">Iniciar sesión</button>
         </div>
       </div>
     </div>
   </div>
-{%endif%}
+  {% comment %}FIN DE MODALS{% endcomment %}
 
-<div class="modal fade" id="notlogprestmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">¿Interesado en este libro?</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Si desea pedir el préstamo del libro, por favor, inicie sesión.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguiré revisando</button>
-                <button type="button" class="btn btn-primary" onclick="location.href='{% url 'usuario:user_login' %}'">Iniciar sesión</button>
-            </div>
-        </div>
-    </div>
-</div>
-{% comment %} FIN DE MODALS {% endcomment %}
-
-<!-- Header-->
-<header class="bg-light py-5 ">
+  <!-- Header -->
+  <header class="bg-light py-5">
     {% if user.is_authenticated %}
-   <div aria-live="polite" aria-atomic="true" class="position-relative">
+      <div aria-live="polite" aria-atomic="true" class="position-relative">
         <div class="toast-container position-fixed top-0 end-0 p-3">
-            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <img src="https://www.iconsdb.com/icons/preview/royal-blue/info-xxl.png" class="rounded me-2" width="24" 
-                    height="24">
-                    <strong class="me-auto">Bibliotinka</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                    <div class="toast-body">
-                    Bienvenido de vuelta, <strong>{{user}}</strong>
-                    </div>
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <img src="https://www.iconsdb.com/icons/preview/royal-blue/info-xxl.png" class="rounded me-2" width="24" height="24" />
+              <strong class="me-auto">Bibliotinka</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
+            <div class="toast-body">
+              Bienvenido de vuelta, <strong>{{ user }}</strong>
+            </div>
+          </div>
         </div>
-    </div>
-    {%endif%}
+      </div>
+    {% endif %}
     <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-dark">
-            <h1 class="display-4 fw-bolder">Bibliotinka</h1>
-            <p class="lead fw-normal text-dark mb-0">Ofreciendo los mejores libros de nuestro repositorio</p>
-        </div>
-    </div>  
-</header>
-<!-- Section-->
-<section class="py-5">
+      <div class="text-center text-dark">
+        <h1 class="display-4 fw-bolder">Bibliotinka</h1>
+        <p class="lead fw-normal text-dark mb-0">Ofreciendo los mejores libros de nuestro repositorio</p>
+      </div>
+    </div>
+  </header>
+  <!-- Section -->
+  <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {% comment %} inicio de carta {% endcomment %}
-            {%if libros%}
-            {% for libro in libros_pag %}
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% comment %}inicio de carta{% endcomment %}
+        {% if libros %}
+          {% for libro in libros_pag %}
             <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="{{ libro.image }}" alt="{{ libro.title }}" />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">{{ libro.title }}</h5>
-                            <!-- Product author-->
-                            {{ libro.author }}
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center">
-                            <a class="btn btn-outline-dark mb-1 mt-auto" href="{% url "core:bookdetailmain" libro.isbn %}">Detalle</a>
-                            {% if ejemplares_count|get_item:libro.isbn == 0 %}
-                                <a class="btn btn-outline-danger mt-auto disabled">Sin stock</a>
-                            {% elif libro.isbn in carrito %}
-                                <a class="btn btn-outline-primary mb-1 mt-auto disabled" href="#">Libro en bandeja</a>
-                            {% else %}
-                                {% if user.is_authenticated %}
-                                    <a class="btn btn-outline-dark mb-1 mt-auto add-to-cart" data-isbn-libro="{{ libro.isbn }}">Añadir al carro</a>
-                                {% else %}
-                                    <a class="btn btn-outline-dark mb-1 mt-auto" data-bs-toggle="modal" data-bs-target="#notlogprestmodal">Añadir al carro</a>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    </div>
+              <div class="card h-100">
+                <!-- Product image -->
+                <img class="card-img-top" src="{{ libro.image }}" alt="{{ libro.title }}" />
+                <!-- Product details -->
+                <div class="card-body p-4">
+                  <div class="text-center">
+                    <!-- Product name -->
+                    <h5 class="fw-bolder">{{ libro.title }}</h5>
+                    <!-- Product author -->
+                    {{ libro.author }}
+                  </div>
                 </div>
-            </div>
-            {% endfor %}
-            {%else%}
-            <div class="text-center">
-                <div class="empty-img"><img src="https://component.gallery/static/8d36eaa25b6dcb026685101ebc379022/Empty%20state%20icon..svg" height="128" alt="..." />
-                </div>
-                <div class="text-center text-dark">
-                    <h1 class="h1 fw-bolder">¡Oops! Aquí no hay nada.</h1>
-                    <p class="lead fw-normal text-dark mb-0">Eliga los libros que desea.</p>
+                <!-- Product actions -->
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                    <a class="btn btn-outline-dark mb-1 mt-auto" href="{% url 'core:bookdetailmain' libro.isbn %}">Detalle</a>
+                    {% if ejemplares_count|get_item:libro.isbn == 0 %}
+                      <a class="btn btn-outline-danger mt-auto disabled">Sin stock</a>
+                    {% elif libro.isbn in carrito %}
+                      <a class="btn btn-outline-primary mb-1 mt-auto disabled" href="#">Libro en bandeja</a>
+                    {% else %}
+                      {% if user.is_authenticated %}
+                        <a class="btn btn-outline-dark mb-1 mt-auto add-to-cart" data-isbn-libro="{{ libro.isbn }}">Añadir al carro</a>
+                      {% else %}
+                        <a class="btn btn-outline-dark mb-1 mt-auto" data-bs-toggle="modal" data-bs-target="#notlogprestmodal">Añadir al carro</a>
+                      {% endif %}
+                    {% endif %}
+                  </div>
                 </div>
               </div>
-            {%endif%}
-            {% comment %} fin de carta {% endcomment %}
-        </div>
-        <div class="pagination justify-content-center">
-            <span class="step-links">
-                {% if libros_pag.has_previous %}
-                    <a class="btn btn-primary" href="?page=1">« first </a>
-                    <a class="btn btn-primary" href="?page={{ libros_pag.previous_page_number }}"> previous </a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ libros_pag.number }} of {{ libros_pag.paginator.num_pages }}.
-                </span>
-
-                {% if libros_pag.has_next %}
-                    <a class="btn btn-primary" href="?page={{ libros_pag.next_page_number }}"> next </a>
-                    <a class="btn btn-primary" href="?page={{ libros_pag.paginator.num_pages }}"> last »</a>
-                {% endif %}
-            </span>
-        </div>
-    </div>
-</section>
-<!-- Footer-->
-<footer class="navbar fixed-bottom bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white"><p class="m-0 text-left">Copyright &copy; Bibliotinka 2023</a>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="text-center">
+            <div class="empty-img">
+              <img src="https://component.gallery/static/8d36eaa25b6dcb026685101ebc379022/Empty%20state%20icon..svg" height="128" alt="..." />
+            </div>
+            <div class="text-center text-dark">
+              <h1 class="h1 fw-bolder">¡Oops! Aquí no hay nada.</h1>
+              <p class="lead fw-normal text-dark mb-0">Eliga los libros que desea.</p>
+            </div>
+          </div>
+        {% endif %}
+        {% comment %}fin de carta{% endcomment %}
       </div>
-</footer>
-{% endblock bodycontent %}
+      <div class="pagination justify-content-center">
+        <span class="step-links">
+          {% if libros_pag.has_previous %}
+            <a class="btn btn-primary" href="?page=1">« first</a>
+            <a class="btn btn-primary" href="?page={{ libros_pag.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">Page {{ libros_pag.number }} of {{ libros_pag.paginator.num_pages }}.</span>
+
+          {% if libros_pag.has_next %}
+            <a class="btn btn-primary" href="?page={{ libros_pag.next_page_number }}">next</a>
+            <a class="btn btn-primary" href="?page={{ libros_pag.paginator.num_pages }}">last »</a>
+          {% endif %}
+        </span>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="navbar fixed-bottom bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white"><p class="m-0 text-left">Copyright &copy; Bibliotinka 2023</p></a>
+    </div>
+  </footer>
+{% endblock %}
