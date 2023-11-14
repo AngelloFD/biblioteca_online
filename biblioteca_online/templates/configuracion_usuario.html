@@ -104,26 +104,32 @@
                   </div>
                   <!-- Submit Button -->
                   <div class="d-grid">
-                    <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Actualizar</button>
+                    <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Actualizar</button>
+                    <br>
+                    <button class="btn btn-primary btn-lg" id="changeButtom" type="button" data-bs-toogle="modal" data-bs-target="#Modal">Cambiar Contraseña</button>
+                    <br>
+                    <button class="btn btn-primary btn-lg" id="EliminarButtom" type="button" >Eliminar Contraseña</button>
                   </div>
-                  <br />
-                  <!-- change Button -->
                   <div class="d-grid">
-                    <button class="btn btn-secondary btn-lg disabled" id="changeButtom" type="button" data-toogle="modal" data-target="#exampleModalCenter">Cambiar Contraseña</button>
+                    <button class="btn btn-primary btn-lg" id="btnChangePass" type="button" data-bs-toogle="modal" data-bs-target="#Modal-pass">Botón 2</button>
                   </div>
                 </form>
               </div>
             </div>
           </div>
           <!-- Modal -->
-          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <!---->
+          <div class="modal" id="Modal-pass" tabindex="-1"  aria-labelledby="modalTitle" aria-hidden="true">
+            <!-- -->
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">...</div>
+                <div class="modal-body">
+                  ...
+                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-primary">Save changes</button>
@@ -134,29 +140,10 @@
         </div>
       </section>
     </main>
-    <!-- Footer -->
-    <!-- <footer class="bg-white py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0">Copyright &copy; Your Website 2023</div></div>
-                    <div class="col-auto">
-                        <a class="small" href="#!">Privacy</a>
-                        <span class="mx-1">&middot;</span>
-                        <a class="small" href="#!">Terms</a>
-                        <span class="mx-1">&middot;</span>
-                        <a class="small" href="#!">Contact</a>
-                    </div>
-                </div>
-            </div>
-        </footer> -->
     <!-- Bootstrap core JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS -->
-    <script src="js/scripts.js"></script>
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-    <!-- * * SB Forms JS * * -->
-    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * * -->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
   </body>
 </html>
+
+

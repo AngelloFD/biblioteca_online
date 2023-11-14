@@ -1,0 +1,55 @@
+body {
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    margin-top: 10px;
+    display: block;
+}
+
+input {
+    margin-bottom: 15px;
+}
+#boton1 {
+    margin-top: 15px;
+    width: 100%;
+}
+#boton2 {
+    margin-top: 15px;
+    width: 100%;
+}
+#boton3 {
+    margin-top: 15px;
+    width: 100%;
+}
+.btn-group {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-group button {
+    flex: 1;
+    margin: 0 5px;
+    width: 100%;
+}
+h1, h3 {
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+}
+.form-container {
+    background-color: rgba(0, 0, 0, 0.1); 
+    padding: 20px;
+    border-radius: 10px; 
+    border-radius: 10px; 
+    max-width: 400px; 
+    margin: 0 auto; 
+}

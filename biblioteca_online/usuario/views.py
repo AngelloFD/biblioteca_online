@@ -63,7 +63,7 @@ def logout_user(request):
 
 def conf_user(request):
     if request.user.is_authenticated:
-        return render(request,'usuario/configuracion_usuario.html')
+        return render(request,'usuario/confUser.html')
     else:
         return render(request, 'usuario/login.html')
 
