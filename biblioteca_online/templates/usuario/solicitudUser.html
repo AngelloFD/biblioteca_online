@@ -1,0 +1,56 @@
+{% extends "templates-base/user-base.html" %}
+{% load static %}
+{% block style %}
+    <!-- SimpleLightbox plugin CSS-->
+    <link type="text/css" rel="stylesheet" href="\static\css\soli.css" />
+{% endblock style %}
+{% block body %}
+<div class="container my-4">
+    <h1 class="text-center">Historial</h1>
+    <div class="d-flex flex-column align-items-start">
+        <div>
+            <button class="btn btn-primary" type = "button" >Actualizar</button>
+            <a class="btn btn-primary" href = "{% url 'core:frontendmain' %}">Regresar</a>
+        </div>
+        <table class="table mt-3 mx-auto">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha de préstamo</th>
+                    <th scope="col">Fecha de devolución</th>
+                    <th scope="col">Libro</th>
+                    <th scope="col">Reportar solicitud</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td><button class="btn btn-primary">Reportar</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td><button class="btn btn-primary">Reportar</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td><button class="btn btn-primary">Reportar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>  
+<div class="container center-content">
+    <img src="/static/image/libro_error.png" alt="Error Image">
+    <label class="error-text">Opps!</label>
+    <label>No hay historial de libros prestados</label>
+</div>
+{% endblock body%}

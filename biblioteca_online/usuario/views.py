@@ -66,4 +66,8 @@ def conf_user(request):
         return render(request,'usuario/confUser.html')
     else:
         return render(request, 'usuario/login.html')
-
+def solicitud_user(request):
+    if request.user.is_authenticated:
+        return render(request,'usuario/solicitudUser.html')
+    else:
+        return render(request, 'usuario/login.html')
