@@ -102,7 +102,7 @@ body {
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
+  background-color: #fdde51;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -387,6 +387,7 @@ button,
 [type=button],
 [type=reset],
 [type=submit] {
+  appearance: none;
   -webkit-appearance: button;
 }
 button:not(:disabled),
@@ -445,6 +446,7 @@ legend + * {
 
 [type=search] {
   outline-offset: -2px;
+  appearance: none;
   -webkit-appearance: textfield;
 }
 
@@ -466,6 +468,7 @@ legend + * {
 
 ::file-selector-button {
   font: inherit;
+  appearance: none;
   -webkit-appearance: button;
 }
 
@@ -6690,7 +6693,7 @@ textarea.form-control-lg {
 
 .text-bg-light {
   color: #000 !important;
-  background-color: RGBA(248, 249, 250, var(--bs-bg-opacity, 1)) !important;
+  background-color: #5c636a;
 }
 
 .text-bg-dark {

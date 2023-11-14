@@ -1,33 +1,80 @@
 body {
+    background-color: #5f5a5a;
     padding: 20px;
+    color: #007fff;
+}
+
+.bg-light {
+    background-color: #3b3b3c!important;
+}
+
+.navbar-light .navbar-brand {
+    color: rgb(255 255 255 / 90%);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(247, 220, 42)
 }
 
 h1 {
+    color: rgb(241, 212, 67);
     margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2em; /* Ajusta el tamaño del texto */
+    text-align: center; /* Alinea el texto al centro */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    font-weight: bold; /* Hace que el texto sea más grueso (negrita) */
 }
 
 form {
-    max-width: 400px;
-    margin: 0 auto;
+    background-color: #f1e07f;
+    border-radius: 70px; 
+    height: 760px; /* Ajusta la altura según tus preferencias */
+    width: 700px; /* Ajusta el ancho según tus preferencias */
+    padding: 20px;
+    margin: auto;
 }
 
 label {
     margin-top: 10px;
     display: block;
+    font-family: 'EB Garamond', serif; /* Cambia la fuente del texto */
+    font-size: 2em; /* Ajusta el tamaño del texto */
+    color: #000000; /* Cambia el color del texto */
+    font-weight: bold; /* Hace el texto más grueso (negrita) */
 }
 
 input {
+    font-family: 'EB Garamond', serif; /* Cambia la fuente del texto */
     margin-bottom: 15px;
 }
 #boton1 {
+    background-color: #5cb85c;
+    border-color: #000000;
+    border-radius: 70px; 
+    font-family: 'Playfair Display', serif;
+    color: #000000;
+    font-weight: bold; /* Hace el texto más grueso (negrita) */
     margin-top: 15px;
     width: 100%;
 }
 #boton2 {
+    background-color: #d46128;
+    border-color: #000000;
+    border-radius: 70px; 
+    font-family: 'Playfair Display', serif;
+    color: #000000;
+    font-weight: bold; /* Hace el texto más grueso (negrita) */
     margin-top: 15px;
     width: 100%;
 }
 #boton3 {
+    background-color: #b54242;
+    border-color: #000000;
+    border-radius: 70px; 
+    font-family: 'Playfair Display', serif;
+    color: #000000;
+    font-weight: bold; /* Hace el texto más grueso (negrita) */
     margin-top: 15px;
     width: 100%;
 }
@@ -43,13 +90,14 @@ input {
 }
 h1, h3 {
     text-align: center;
-    font-family: 'Pacifico', cursive;
+    font-family: 'Playfair Display', serif;
 }
 .form-container {
     background-color: rgba(0, 0, 0, 0.1); 
     padding: 20px;
-    border-radius: 10px; 
-    border-radius: 10px; 
-    max-width: 400px; 
+    border-radius: 70px; 
+    height: 900px; /* Ajusta la altura según tus preferencias */
+    width: 1200px; /* Ajusta el ancho según tus preferencias */
     margin: 0 auto; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade una sombra ligera */
 }
