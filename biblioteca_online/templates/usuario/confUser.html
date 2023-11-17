@@ -31,7 +31,8 @@
         <div class="form-container">
             <h1><i class="fas fa-cogs"></i>Configuración de Usuario</h1>
             <h3>{{ user.username }}</h3>
-            <form>
+            <form method="POST">
+                {% csrf_token %}
                 <label for="username">Nombre de Usuario:</label>
                 <input id="username" class="form-control" placeholder="Escribe tu nombre de usuario..." type="text" value="{{ user.username }}" data-sb-validations="required" required>
                 <div class="invalid-feedback" data-sb-feedback="username:required">Este campo es requerido</div>
@@ -42,15 +43,28 @@
                 <div class="invalid-feedback" data-sb-feedback="email:email">El email no es valido</div>
 
                 <label for="firstName">Nombre:</label>
-                <input id="firstName" class="form-control" placeholder="Escribe tu nombre..." type="text" value="{{ user.first_name }}" data-sb-validations="required" required>
+                {% comment %} si user.first_name no está vacio, desplegarlo {% endcomment %}
+                {% if user.first_name %}
+                    <input id="firstName" name="first_name" class="form-control" placeholder="Escribe tu nombre..." type="text" value="{{ user.first_name }}" data-sb-validations="required" required disabled>
+                {% else %}
+                    <input id="firstName" name="first_name" class="form-control" placeholder="Escribe tu nombre..." type="text" value="{{ result.nombres }}" data-sb-validations="required" required disabled>
+                {% endif %}
                 <div class="invalid-feedback" data-sb-feedback="firstName:required">Este campo es requerido</div>
 
                 <label for="lastName">Apellido:</label>
-                <input id="lastName" class="form-control" type="text" placeholder="Escribe tu apellido..." value="{{ user.last_name }}" data-sb-validations="required" required>
+                {% if user.last_name %}
+                    <input id="lastName" name="last_name" class="form-control" type="text" placeholder="Escribe tu apellido..." value="{{ user.last_name }}" data-sb-validations="required" required disabled>
+                {% else %}
+                    <input id="lastName" name="last_name" class="form-control" type="text" placeholder="Escribe tu apellido..." value="{{ result.apellidoPaterno }} {{ result.apellidoMaterno }}" data-sb-validations="required" required disabled>
+                {% endif %}
                 <div class="invalid-feedback" data-sb-feedback="lastName:required">Este campo es requerido</div>
 
                 <label for="dni">DNI:</label>
-                <input id="dni" class="form-control" type="text" placeholder="Escribe tu DNI..." value="Falta migrar" data-sb-validations="required" required>
+                {% if user.dni %}
+                    <input id="dni" name="dni" class="form-control" type="text" placeholder="Escribe tu DNI..." value="{{ user.dni }}" data-sb-validations="required" required>
+                {% else %}
+                    <input id="dni" name="dni" class="form-control" type="text" placeholder="Escribe tu DNI..." value="{{ result.numeroDocumento}}" data-sb-validations="required" required>
+                {% endif %}
                 <div class="invalid-feedback" data-sb-feedback="dni:required">Este campo es requerido</div>
 
                     <!--Botones-->
