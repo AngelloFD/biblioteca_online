@@ -1,3 +1,5 @@
+from prestamos.prestamosbc.prestamosBC import BC_GetPrestamoOfUsuario
+from usuario.usuariobc.usuariobc import BC_GetusuariobyUser
 from .forms import RegisterForm, LoginForm
 from .services import verificar_DNI
 from .models import Usuario
@@ -79,7 +81,6 @@ def conf_user(request):
         if dni is None:
             return render(request, "usuario/confUser.html")
         result = verificar_DNI(dni)
-        print("result: ", result)
         if result and 'nombres' in result:
             # agregar first_name, last_name y dni al usuario
             user = request.user
@@ -104,6 +105,12 @@ def conf_user(request):
 
 def solicitud_user(request):
     if request.user.is_authenticated:
-        return render(request, "usuario/solicitudUser.html")
+        usuario:Usuario
+        usuario = BC_GetusuariobyUser(request.user)
+        prestamos = BC_GetPrestamoOfUsuario(usuario)
+        context = {
+            "prestamos": prestamos
+        }
+        return render(request, "usuario/solicitudUser.html",context)
     else:
         return render(request, "usuario/login.html")

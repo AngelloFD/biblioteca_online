@@ -27,4 +27,4 @@ class InformeUsuario(models.Model):
    fecha_creacion = models.DateField(auto_now_add=True, null=False, blank=False)
    
    def __str__(self):
-      return self.id_informe + " " + self.id_usuario
+      return self.id_informe + " - " + str(self.id_usuario)
