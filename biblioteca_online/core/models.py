@@ -18,6 +18,13 @@ class Libro(models.Model):
    summary = models.CharField(max_length=4000, null=False, blank=False)
    image = models.URLField(max_length=240, null=True, blank=False)
 
+   def save(self, *args, **kwargs):
+        # Genera el ID del libro automáticamente
+        if not self.id_libro:
+            self.id_libro = f"{self.author[0].capitalize()}{self.isbn}"
+
+        super().save(*args, **kwargs)
+
    def __str__(self):
       return self.title
 

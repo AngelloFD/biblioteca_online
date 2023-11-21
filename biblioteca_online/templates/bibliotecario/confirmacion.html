@@ -1,0 +1,10 @@
+<!-- En tu archivo templates/confirmacion.html -->
+{% extends "templates-base/user-base.html" %}
+
+{% block body %}
+  <h2>Libro Agregado</h2>
+  <p>Se ha agregado el siguiente libro al catálogo:</p>
+  <p>Título: {{ libro.title }}</p>
+  <p>Autor: {{ libro.author }}</p>
+  <!-- Agrega más detalles según sea necesario -->
+{% endblock body %} 

@@ -17,7 +17,6 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 def home_page(request):
     return render(request, "usuario/home.html")
 
-
 @ensure_csrf_cookie
 def login_user(request):
     if request.user.is_authenticated:
@@ -31,7 +30,11 @@ def login_user(request):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
-                return redirect("core:frontendmain")
+                if user.username == "booker":
+                    # Redirigir al dashboard del bibliotecario
+                    return redirect("bibliotecario:dashboardBooker")
+                else:
+                    return redirect("core:frontendmain")
             else:
                 messages.success(request, "Usuario o contraseña incorrectos")
                 return render(

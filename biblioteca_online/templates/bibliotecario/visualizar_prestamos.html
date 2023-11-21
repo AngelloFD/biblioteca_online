@@ -1,0 +1,37 @@
+<!-- En tu archivo templates/confirmacion.html -->
+{% extends "templates-base/user-base.html" %}
+
+{% block body %}
+<h1>Lista de Préstamos</h1>
+
+    <!-- Barra de búsqueda por ID de usuario -->
+    <form method="get" action="{% url 'bibliotecario:visualizar_prestamos' %}">
+        <label for="id_usuario">Buscar por ID de usuario:</label>
+        <input type="text" name="id_usuario">
+        <input type="submit" value="Buscar">
+    </form>
+
+    <!-- Tabla de préstamos -->
+    <table border="1">
+        <tr>
+            <th>ID Préstamo</th>
+            <th>ID Usuario</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Fecha Devolución</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        {% for prestamo in prestamos %}
+        <tr>
+            <td>{{ prestamo.id_prestamo }}</td>
+            <td>{{ prestamo.id_usuario.id }}</td>
+            <td>{{ prestamo.fecha_iniprestamo }}</td>
+            <td>{{ prestamo.fecha_finprestamo }}</td>
+            <td>{{ prestamo.fecha_devolucion }}</td>
+            <td>{{ prestamo.prestado_estado.prestado }}</td>
+            <td><a href="{% url 'bibliotecario:modificar_estado_prestamo' prestamo.id_prestamo %}">Modificar Estado</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock body %} 

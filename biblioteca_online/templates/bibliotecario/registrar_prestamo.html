@@ -1,0 +1,38 @@
+<!-- En tu archivo templates/agregar_libro.html -->
+{% extends "templates-base/user-base.html" %}
+
+{% block body %}
+<h2>Registrar Préstamo</h2>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <!-- Tabla de Ejemplares Disponibles -->
+        <div>
+            <label for="id_ejemplares">Ejemplares Disponibles:</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Ejemplar</th>
+                        <th>Libro</th>
+                        <th>Estado</th>
+                        <!-- Agrega más encabezados según sea necesario -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ejemplar in ejemplares_disponibles %}
+                        <tr>
+                            <td>{{ ejemplar.id_ejemplar }}</td>
+                            <td>{{ ejemplar.libro.title }}</td>
+                            <td>{{ ejemplar.estado.nombre }}</td>
+                            <!-- Agrega más celdas según sea necesario -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {{ form.as_p }}
+
+        <button type="submit">Registrar Ejemplar</button>
+    </form>
+{% endblock body %} 

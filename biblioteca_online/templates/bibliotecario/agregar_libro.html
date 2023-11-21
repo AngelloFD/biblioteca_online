@@ -1,0 +1,22 @@
+<!-- En tu archivo templates/agregar_libro.html -->
+{% extends "templates-base/user-base.html" %}
+
+{% block body %}
+  <h2>Agregar Libro</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+  </form>
+
+  {% if form.errors %}
+    <div class="error-message">
+      <p>Por favor, corrige los siguientes errores:</p>
+      {{ form.non_field_errors }}
+      {{ form.title.errors }}
+      {{ form.author.errors }}
+      {{ form.isbn.errors }}
+      <!-- Agrega más campos según sea necesario -->
+    </div>
+  {% endif %}
+{% endblock body %} 
