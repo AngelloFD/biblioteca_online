@@ -71,11 +71,11 @@
                     <button id = "boton1" class="btn btn-primary" type="submit">
                         Actualizar
                     </button>
-                    <button id = "boton2" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
-                        Cambiar contraseña
+                    <button id = "boton2" type="button" class="btn btn-primary" data-toggle="modal" >
+                        <a href="{% url 'usuario:cambiar_password' %}">Cambiar contraseña</a>
                     </button>
-                    <button id = "boton3" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Eliminar cuenta
+                    <button id = "boton3" type="button" class="btn btn-primary" data-toggle="modal" >
+                        <a href="{% url 'usuario:eliminar_cuenta' %}">Eliminar cuenta</a>
                     </button>
             </form>
         </div>

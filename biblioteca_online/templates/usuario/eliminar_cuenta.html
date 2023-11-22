@@ -1,0 +1,12 @@
+<!-- usuario/cambiar_contraseña.html -->
+{% extends "templates-base/user-base.html" %}
+
+{% block body %}
+<h2>Eliminar Cuenta</h2>
+<form method="post" action="{% url 'usuario:eliminar_cuenta' %}">
+  {% csrf_token %}
+  <label for="password">Contraseña:</label>
+  <input type="password" name="password" required>
+  <button type="submit">Eliminar Cuenta</button>
+</form>
+{% endblock body %} 

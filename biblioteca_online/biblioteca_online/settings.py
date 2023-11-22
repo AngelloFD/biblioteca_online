@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import ssl
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -46,6 +47,18 @@ INSTALLED_APPS = [
     'bibliotecario',
     'prestamos',
 ]
+
+# Configuración del correo electrónico
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Para Gmail
+# EMAIL_HOST = 'smtp.live.com'  # Para Hotmail (Outlook)
+EMAIL_USE_SSL = True # Descomenta esta línea si estás usando SSL para Gmail
+EMAIL_USE_TLS = False
+EMAIL_PORT = 465
+EMAIL_SSL_PROTOCOL = ssl.PROTOCOL_TLS
+# EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ja2958110@gmail.com'  # Tu dirección de correo electrónico de Gmail o Hotmail
+EMAIL_HOST_PASSWORD = 'utav ircj vngu mzmu'  # Tu contraseña de Gmail o Hotmail
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -114,6 +127,9 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',

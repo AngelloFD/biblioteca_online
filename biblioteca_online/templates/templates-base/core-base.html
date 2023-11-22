@@ -68,6 +68,21 @@
                 <li>
                   <a class="dropdown-item" href="\confUsuario">Configuración</a>
                 </li>
+                {% if user.is_staff and user.username == 'booker' %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'bibliotecario:dashboardBooker' %}">Dashboard del Bibliotecario</a>
+                </li>
+                {% endif %}
+                {% if user.is_superuser %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard del Bibliotecario</a>
+                </li>
+                {% endif %}
+                {% if user.is_superuser %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'admin:index' %}">Panel de Administrador</a>
+                  </li>
+                {% endif %}
                 <li>
                   <hr class="dropdown-divider" />
                 </li>

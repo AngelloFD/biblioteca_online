@@ -1,0 +1,11 @@
+<!-- usuario/cambiar_contraseña.html -->
+{% extends "templates-base/user-base.html" %}
+
+{% block body %}
+<h2>¿Estás seguro de que deseas eliminar tu cuenta?</h2>
+<form method="post" action="{% url 'usuario:confirmar_eliminar_cuenta' %}">
+  {% csrf_token %}
+  <button type="submit">Sí, eliminar cuenta</button>
+  <a href="{% url 'usuario:configure_page' %}">No, volver atrás</a>
+</form>
+{% endblock body %} 

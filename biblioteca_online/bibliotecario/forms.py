@@ -48,10 +48,11 @@ class EjemplarForm(forms.ModelForm):
 class PrestamoForm(forms.ModelForm):
     class Meta:
         model = Prestamo
-        fields = ['id_usuario', 'id_ejemplares', 'fecha_iniprestamo', 'fecha_finprestamo', 'fecha_devolucion']
+        fields = ['id_usuario', 'id_ejemplares', 'prestado_estado', 'fecha_iniprestamo', 'fecha_finprestamo', 'fecha_devolucion']
         widgets = {
             'id_usuario': forms.Select(attrs={'required': 'true'}),
             'id_ejemplares': forms.TextInput(attrs={'required': 'true'}),
+            'prestado_estado': forms.Select(attrs={'required': 'true'}),
             'fecha_iniprestamo': forms.DateInput(attrs={'type': 'date'}),
             'fecha_finprestamo': forms.DateInput(attrs={'type': 'date'}),
             'fecha_devolucion': forms.DateInput(attrs={'type': 'date'}),
