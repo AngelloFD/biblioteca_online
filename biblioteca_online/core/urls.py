@@ -8,6 +8,7 @@ urlpatterns = [
    path('main/prestamo/', include('prestamos.urls')),
    # links que manejan solicitudes del carrito
    path('add_book/', views.add_book, name='add_book'),
+   path('crear_solicitud/', views.crear_prestamo, name='crear_solicitud'),
    path('eliminar_libro/', views.eliminar_libro, name='eliminar_libro'),
    path('print_carrito/<int:timestamp>/', views.print_carrito, name='print_carritos'),
 ]

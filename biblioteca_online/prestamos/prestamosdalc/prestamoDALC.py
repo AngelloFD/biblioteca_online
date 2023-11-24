@@ -20,3 +20,14 @@ def DALC_GetPrestamoByID(id):
     except MultipleObjectsReturned:
         raise f"Error en DALC_GetPrestamoByID -> {MultipleObjectsReturned}"
     
+def DALC_crearPrestamo(prestamo:Prestamo):
+    try:
+        nuevo_objeto = prestamo 
+        nuevo_objeto.save()
+        return True
+    except ObjectDoesNotExist:
+        raise f"Error en DALC_GetPrestamoByID -> {ObjectDoesNotExist}"
+    except MultipleObjectsReturned:
+        raise f"Error en DALC_GetPrestamoByID -> {MultipleObjectsReturned}"
+
+    

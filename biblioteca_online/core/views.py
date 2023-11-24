@@ -1,6 +1,9 @@
+from datetime import date, timedelta
 from django.http import HttpResponseBadRequest, HttpResponseNotFound, JsonResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from prestamos.prestamosbc.prestamosBC import BC_crearPrestamo
+from usuario.usuariobc.usuariobc import BC_GetusuariobyUser
 from core.utils.core_utils import CheckUserDNI
 from core.corebc.librobc import DB_GetBookbyISBN
 from core.models import Libro
@@ -84,6 +87,32 @@ def carrito_vacio(request):
         return JsonResponse({"success": True})
     return JsonResponse({"success": False})  
     
+def crear_prestamo(request):
+    isbns = request.session.get("carrito", [])
+    lista = []
+    for isbn in isbns:
+        local = DB_GetBookbyISBN(isbn)
+        lista.append(local)
+    id_ejemplares:str
+    for item in lista:
+        id_ejemplares = item + ','
+    cadena_sin_ultimo_digito = id_prestamo[:-1]
+    print(cadena_sin_ultimo_digito)
+    id_ejemplares = cadena_sin_ultimo_digito
+    prestado_estado = 'En espera'
+    usuario = BC_GetusuariobyUser(request.user)
+    id_usuario = usuario.id
+    id_prestamo = request.user.id + date.today()
+    fecha_iniprestamo = date.today()
+    fecha_actual = date.today()
+    fecha_finprestamo = fecha_actual + timedelta(days=20)
+    fecha_devolucion = None
+    if BC_crearPrestamo(id_prestamo,id_ejemplares,id_usuario,prestado_estado,fecha_iniprestamo,fecha_finprestamo,fecha_devolucion):
+        if "carrito" in request.session:
+            del request.session["carrito"]
+            request.session.save()
+        return main_frontend(request)
+    return carrito_vacio(request)
 
 def bookdetail_frontend(request, isbn):
     libro: Libro

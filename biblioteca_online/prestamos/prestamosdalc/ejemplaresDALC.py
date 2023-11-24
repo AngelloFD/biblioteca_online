@@ -10,3 +10,6 @@ def DALC_GetEjemplarbyID(id):
     except MultipleObjectsReturned:
         raise f"Error en DALC_GetEjemplarbyID -> {MultipleObjectsReturned}"
     
+
+
+    
