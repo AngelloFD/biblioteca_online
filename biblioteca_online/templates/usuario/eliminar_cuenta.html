@@ -1,12 +1,25 @@
-<!-- usuario/cambiar_contraseña.html -->
 {% extends "templates-base/user-base.html" %}
 
+{% block style %}
+    <!-- Agrega la referencia a tu archivo de estilos CSS -->
+    <link rel="stylesheet" href="\static\css\conf_eli_cuen.css">
+{% endblock style %}
+
 {% block body %}
-<h2>Eliminar Cuenta</h2>
-<form method="post" action="{% url 'usuario:eliminar_cuenta' %}">
-  {% csrf_token %}
-  <label for="password">Contraseña:</label>
-  <input type="password" name="password" required>
-  <button type="submit">Eliminar Cuenta</button>
-</form>
-{% endblock body %} 
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <h2 class="mb-4">Eliminar Cuenta</h2>
+        <img src="https://cdn-icons-png.flaticon.com/512/216/216684.png" alt="Icono de eliminar cuenta" class="img-fluid mb-4 mx-auto">
+      </div>
+      <div class="col-md-6">
+        <form method="post" action="{% url 'usuario:eliminar_cuenta' %}" class="needs-validation" novalidate>
+          {% csrf_token %}
+          <label for="password" class="form-label">Contraseña:</label>
+          <input type="password" name="password" class="form-control" required>
+          <button type="submit" class="btn btn-danger mt-3">Eliminar Cuenta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock body %}
