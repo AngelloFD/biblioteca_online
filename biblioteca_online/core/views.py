@@ -1,4 +1,4 @@
-from django.http import HttpResponseNotFound, JsonResponse
+from django.http import HttpResponseBadRequest, HttpResponseNotFound, JsonResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from core.utils.core_utils import CheckUserDNI
@@ -37,7 +37,7 @@ def main_frontend(request):
     }
     return render(request, "core/store_mainpage/main_frontend.html", context)
 
-
+""""
 def add_book(request):
     isbn_libro = request.GET.get("isbn_libro")
     print(f"Dato a agregar: {isbn_libro}")
@@ -45,6 +45,28 @@ def add_book(request):
     carrito.append(isbn_libro)
     request.session["carrito"] = carrito
     return JsonResponse({"num_items": len(carrito), "in_cart": True})
+"""
+
+def add_book(request):
+    isbn_libro = request.GET.get("isbn_libro")
+    print(f"Dato a agregar: {isbn_libro}")
+    carrito = request.session.get("carrito", [])
+    
+    # Verificar si el libro ya está en el carrito
+    if isbn_libro in carrito:
+        return HttpResponseBadRequest("El libro ya está en la bandeja")
+
+    carrito.append(isbn_libro)
+    request.session["carrito"] = carrito
+
+    # Obtener detalles del libro recién agregado
+    libro = DB_GetBookbyISBN(isbn_libro)
+    libro_info = {"isbn": libro.isbn, "titulo": libro.title}
+
+    # Enviar detalles del libro a través de WebSockets (o usar otra técnica de actualización en tiempo real)
+    # Aquí puedes agregar código para enviar detalles a través de WebSockets o utilizar otra técnica de actualización en tiempo real
+
+    return JsonResponse({"num_items": len(carrito), "in_cart": True, "libro_info": libro_info})
 
 
 def eliminar_libro(request):
