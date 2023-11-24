@@ -88,6 +88,13 @@ def print_carrito(request, timestamp):
         lista.append({"isbn": libro.isbn, "titulo": libro.title})
     return JsonResponse({"carrito_detalle": lista})
 
+def carrito_vacio(request):
+    if "carrito" in request.session:
+        del request.session["carrito"]
+        request.session.save()
+        return JsonResponse({"success": True})
+    return JsonResponse({"success": False})  
+    
 
 def bookdetail_frontend(request, isbn):
     libro: Libro
