@@ -1,11 +1,12 @@
 body {
-    background-color: #5f5a5a;
+    background-color: #F8F9fa;
     padding: 20px;
-    color: #007fff;
+    color: rgb(247, 220, 42);
 }
 
 .bg-light {
-    background-color: #3b3b3c!important;
+    background-color: rgb(161, 156, 156)!important;
+    border-radius: 10px;
 }
 
 .navbar-light .navbar-brand {
@@ -17,9 +18,8 @@ body {
 }
 
 h1 {
-    color: rgb(241, 212, 67);
+    color: black;
     margin-bottom: 20px;
-    font-family: 'Playfair Display', serif;
     font-size: 2em; /* Ajusta el tamaño del texto */
     text-align: center; /* Alinea el texto al centro */
     text-transform: uppercase; /* Convierte el texto a mayúsculas */
@@ -27,8 +27,8 @@ h1 {
 }
 
 form {
-    background-color: #f1e07f;
-    border-radius: 70px; 
+    background-color: rgb(161, 156, 156);
+    border-radius: 30px; 
     height: 760px; /* Ajusta la altura según tus preferencias */
     width: 700px; /* Ajusta el ancho según tus preferencias */
     padding: 20px;
@@ -38,7 +38,6 @@ form {
 label {
     margin-top: 10px;
     display: block;
-    font-family: 'EB Garamond', serif; /* Cambia la fuente del texto */
     font-size: 2em; /* Ajusta el tamaño del texto */
     color: #000000; /* Cambia el color del texto */
     font-weight: bold; /* Hace el texto más grueso (negrita) */
@@ -49,7 +48,7 @@ input {
     margin-bottom: 15px;
 }
 #boton1 {
-    background-color: #5cb85c;
+    background-color: #F8D442;
     border-color: #000000;
     border-radius: 70px; 
     font-family: 'Playfair Display', serif;
@@ -59,7 +58,7 @@ input {
     width: 100%;
 }
 #boton2 {
-    background-color: #d46128;
+    background-color: #F8D442;
     border-color: #000000;
     border-radius: 70px; 
     font-family: 'Playfair Display', serif;
@@ -69,7 +68,7 @@ input {
     width: 100%;
 }
 #boton3 {
-    background-color: #b54242;
+    background-color: red;
     border-color: #000000;
     border-radius: 70px; 
     font-family: 'Playfair Display', serif;
@@ -90,14 +89,16 @@ input {
 }
 h1, h3 {
     text-align: center;
-    font-family: 'Playfair Display', serif;
 }
 .form-container {
-    background-color: rgba(0, 0, 0, 0.1); 
+    background-color: white; 
     padding: 20px;
     border-radius: 70px; 
     height: 900px; /* Ajusta la altura según tus preferencias */
     width: 1200px; /* Ajusta el ancho según tus preferencias */
     margin: 0 auto; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade una sombra ligera */
+}
+a {
+    color: black;
 }
