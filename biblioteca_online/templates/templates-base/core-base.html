@@ -76,11 +76,6 @@
                 </li>
                 {% endif %}
                 {% if user.is_superuser %}
-                <li>
-                  <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard del Bibliotecario</a>
-                </li>
-                {% endif %}
-                {% if user.is_superuser %}
                   <li>
                     <a class="dropdown-item" href="{% url 'admin:index' %}">Panel de Administrador</a>
                   </li>

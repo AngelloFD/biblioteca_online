@@ -40,8 +40,15 @@ def login_user(request):
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
             if user:
-                login(request, user)
-                return redirect("core:frontendmain")
+                usuario = BC_GetusuariobyUser(user)
+                if usuario.email_verificado:
+                    login(request, user)
+                    return redirect("core:frontendmain")
+                else:
+                    messages.success(request, "Porfavor verifica tu correo")
+                    return render(
+                        request, "usuario/registration/login.html", {"form": form}
+                    )
             else:
                 messages.success(request, "Usuario o contraseña incorrectos")
                 return render(
@@ -53,29 +60,6 @@ def login_user(request):
         form = LoginForm()
         print(form.errors)
         return render(request, "usuario/registration/login.html", {"form": form})
-
-"""
-@ensure_csrf_cookie
-def register(request):
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()
-
-            user.save()
-            raw_password = form.cleaned_data.get("password1")
-
-            user = authenticate(username=user.username, password=raw_password)
-            if user:
-                login(request, user)
-                return redirect("core:frontendmain")
-        else:
-            messages.success(request, f"{form.errors}")
-    else:
-        form = RegisterForm()
-    return render(request, "usuario/registration/sign_up.html", {"form": form})
-"""
 
 @ensure_csrf_cookie
 def register(request):
