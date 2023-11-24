@@ -65,7 +65,7 @@
               <a class="nav-link text-dark dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user }}</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="\soliUser">Mis solicitudes</a>
+                  <a class="dropdown-item" href="{% url 'usuario:solicitud_user' %}">Mis solicitudes</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="\confUsuario">Configuración</a>

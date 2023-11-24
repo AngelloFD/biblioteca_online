@@ -112,3 +112,4 @@ def bookdetail_frontend(request, isbn):
         "ejemplares_count": ejemplares_count,
     }
     return render(request, "core/store_mainpage/main_bookdetail.html", context)
+

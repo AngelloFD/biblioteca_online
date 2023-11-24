@@ -23,9 +23,8 @@ def create_Usuario(sender, instance, created,**kwargs):
     if created:
         Usuario.objects.create(user=instance)
 
-# Función para verificar el correo usando la API de Kickbox
 def verificar_correo(email):
-    kickbox_api_key = "test_2413259a4f8d4f2fcecdc0aa9bdb6796d865559417f3fd0774a244346bbd0cbc"  # Reemplaza con tu propia clave de API de Kickbox
+    kickbox_api_key = "test_2413259a4f8d4f2fcecdc0aa9bdb6796d865559417f3fd0774a244346bbd0cbc" 
     url = f"https://open.kickbox.com/v1/disposable/{email}"
 
     headers = {

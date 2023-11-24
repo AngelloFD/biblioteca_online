@@ -10,3 +10,13 @@ def DALC_GetPrestamoOfUsuario(usuario:Usuario):
         raise f"Error en DALC_GetPrestamoOfUsuario -> {ObjectDoesNotExist}"
     except MultipleObjectsReturned:
         raise f"Error en DALC_GetPrestamoOfUsuario -> {MultipleObjectsReturned}"
+    
+def DALC_GetPrestamoByID(id):
+    try:
+        prestamo = Prestamo.objects.filter(id_prestamo=id)
+        return prestamo
+    except ObjectDoesNotExist:
+        raise f"Error en DALC_GetPrestamoByID -> {ObjectDoesNotExist}"
+    except MultipleObjectsReturned:
+        raise f"Error en DALC_GetPrestamoByID -> {MultipleObjectsReturned}"
+    
