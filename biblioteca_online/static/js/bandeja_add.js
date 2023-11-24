@@ -51,5 +51,8 @@ $(document).ready(function(){
     actualizarCarrito();
   });
 
+  $('.limpiar-boton').click(function(){
+
+  });
   actualizarCarrito();
 });
