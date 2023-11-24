@@ -160,33 +160,36 @@ def logout_user(request):
 
 @ensure_csrf_cookie
 def conf_user(request):
-    if request.method == "POST":
-        dni = request.POST.get("dni")
-        print("dni: ", dni)
-        if dni is None:
-            return render(request, "usuario/confUser.html")
-        result = verificar_DNI(dni)
-        if result and 'nombres' in result:
-            # agregar first_name, last_name y dni al usuario
-            user = request.user
-            user.first_name = result["nombres"]
-            user.last_name = result["apellidoPaterno"] + " " + result["apellidoMaterno"]
-            try:
-                user.usuario
-            except ObjectDoesNotExist:
-                Usuario.objects.create(user=user)
-            print(user.usuario.dni)
-            user.usuario.dni = result["numeroDocumento"]
-            user.usuario.save()
-            user.save()
-            messages.success(request, "Datos actualizados correctamente")
-            # return redirect("core:frontendmain")
-            return render(request, "usuario/confUser.html", {"result": result})
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            dni = request.POST.get("dni")
+            print("dni: ", dni)
+            if dni is None:
+                return render(request, "usuario/confUser.html")
+            result = verificar_DNI(dni)
+            if result and 'nombres' in result:
+                # agregar first_name, last_name y dni al usuario
+                user = request.user
+                user.first_name = result["nombres"]
+                user.last_name = result["apellidoPaterno"] + " " + result["apellidoMaterno"]
+                try:
+                    user.usuario
+                except ObjectDoesNotExist:
+                    Usuario.objects.create(user=user)
+                print(user.usuario.dni)
+                user.usuario.dni = result["numeroDocumento"]
+                user.usuario.save()
+                user.save()
+                messages.success(request, "Datos actualizados correctamente")
+                # return redirect("core:frontendmain")
+                return render(request, "usuario/confUser.html", {"result": result})
+            else:
+                messages.error(request, "DNI no válido")
+                return render(request, "usuario/confUser.html")
         else:
-            messages.error(request, "DNI no válido")
             return render(request, "usuario/confUser.html")
     else:
-        return render(request, "usuario/confUser.html")
+        return redirect("usuario:user_login")
 
 @ensure_csrf_cookie
 def cambiar_password(request):
@@ -240,4 +243,4 @@ def solicitud_user(request):
         }
         return render(request, "usuario/solicitudUser.html",context)
     else:
-        return render(request, "usuario/login.html")
+        return redirect("usuario:user_login")

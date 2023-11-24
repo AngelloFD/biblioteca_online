@@ -172,7 +172,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 LOGIN_REDIRECT_URL = 'core:frontendmain'
-LOGOUT_REDIRECT_URL = 'usuario:usuario:welcome_page'
+LOGOUT_REDIRECT_URL = 'usuario:welcome_page'
 
 SESSION_COOKIE_AGE = 2592000 # 30 días
 SESSION_COOKIE_SECURE = True
