@@ -19,11 +19,10 @@ $(document).ready(function(){
             console.error("Error al obtener datos del carrito: ", error);
         }
     });
-
   }
 
   $(".eliminar-libro").click(function(){
-    var button = $(this);  // Guarda una referencia al botón
+    var button = $(this);
     var isbnLibro = button.data('isbn-libro');
     $.get("/eliminar_libro/", {isbn_libro: isbnLibro}, function(data){
       $(".badge").text(data.num_items);
@@ -32,15 +31,17 @@ $(document).ready(function(){
   });
 
   $(".add-to-cart").click(function(){
-    var button = $(this);  // Guarda una referencia al botón
+    var button = $(this);
     var isbnLibro = button.data('isbn-libro');
+    
     $.get("/add_book/", {isbn_libro: isbnLibro}, function(data){
-      $(".badge").text(data.num_items);
-      actualizarCarrito();
       if (data.in_cart) {
         button.text("Libro en bandeja");  // Actualiza el texto del botón
         button.removeClass("btn-outline-dark").addClass("btn-outline-primary disabled");
       }
+
+      $(".badge").text(data.num_items);
+      actualizarCarrito();
     });
   });
 
@@ -49,6 +50,9 @@ $(document).ready(function(){
     $('.offcanvas-body').load(url + ' .offcanvas-body > *');
     actualizarCarrito();
   });
+
+  $('.limpiar-boton').click(function(){
+
+  });
   actualizarCarrito();
 });
-

@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Libro Prestado</title>
-</head>
-<body>
-    <h1>Libro Prestado</h1>
-    <p>Lo sentimos, este libro ya ha sido prestado.</p>
-</body>
-</html>
+{% extends 'templates-base/user-base.html' %}
+{% load static %}
+{% block style %}
+  <!-- SimpleLightbox plugin CSS -->
+  <link type="text/css" rel="stylesheet" href="\static\css\soli.css" />
+{% endblock %}
+{% block body %}
+  <div class="container my-4">
+    <h1 class="text-center">Historial</h1>
+    <div class="d-flex flex-column align-items-start">
+      <div>
+        <a class="btn btn-primary" href="{% url 'usuario:solicitud_user' %}">Regresar</a>
+      </div>
+      <table class="table mt-3 mx-auto">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Libro</th>
+            <th scope="col">Condición</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ejemplar in ejemplares %}
+            <tr>
+              <td>{{ ejemplar.libro.title }}</td>
+              <td>{{ ejemplar.resumen }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
+
+{% for ejemplar in ejemplares %}
+  <p>Nombre del libro: {{ ejemplar.libro.title }}</p>
+  <p>Condición: {{ ejemplar.resumen }}</p>
+{% endfor %}

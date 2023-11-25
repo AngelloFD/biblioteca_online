@@ -1,0 +1,58 @@
+{% extends "templates-base/user-base.html" %}
+
+{% block style %}
+    <!-- Enlace al archivo de estilo específico de este template -->
+    <link type="text/css" rel="stylesheet" href="\static\css\templateGeneral.css" />
+    <!-- Agrega estilos específicos para la tabla si es necesario -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+{% endblock style %}
+
+{% block body %}
+<div class="center-container">
+    <h1>BIBLIOTINKA Dashboard</h1>
+    <div class="info-container">
+        <h2>Bienvenido, {{ user.username }}</h2>
+    </div>
+    <div class="content-container">
+        <!-- Contenido específico para el dashboard del administrador/bibliotecario -->
+        {% if user.is_staff %}
+            <!-- Contenido para el administrador -->
+            <p>¡Eres un administrador!</p>
+        {% else %}
+            <!-- Contenido para el bibliotecario -->
+            <p>¡Eres un bibliotecario!</p>
+            <!-- Agrega una tabla para mostrar los datos de la base de datos -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Columna 1</th>
+                        <th>Columna 2</th>
+                        <!-- Agrega más encabezados según tu modelo de datos -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in biblioteca_data %}
+                        <tr>
+                            <td>{{ item.columna1 }}</td>
+                            <td>{{ item.columna2 }}</td>
+                            <!-- Agrega más celdas según tu modelo de datos -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}

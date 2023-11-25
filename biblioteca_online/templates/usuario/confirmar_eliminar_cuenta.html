@@ -1,0 +1,20 @@
+{% extends "templates-base/user-base.html" %}
+{% block style %}
+    <!-- Agrega la referencia a tu archivo de estilos CSS -->
+    <link rel="stylesheet" href="\static\css\con_eli_cuen.css">
+{% endblock style %}
+{% block body %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4 text-center">
+        <h2 class="mb-4">¿Estás seguro de que deseas eliminar tu cuenta?</h2>      </div>
+      <div class="col-md-6">
+        <form method="post" action="{% url 'usuario:confirmar_eliminar_cuenta' %}" class="needs-validation" novalidate>
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger mt-3">Sí, eliminar cuenta</button>
+          <a href="{% url 'usuario:configure_page' %}" class="btn btn-secondary mt-3">No, volver atrás</a>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

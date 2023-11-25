@@ -1,0 +1,10 @@
+<!-- En tu archivo templates/confirmacion.html -->
+{% extends "templates-base/user-base.html" %}
+
+{% block body %}
+  <h2>Ejemplar Agregado</h2>
+  <p>Se ha agregado el siguiente ejemplar al catálogo:</p>
+  <p>Libro: {{ ejemplar.libro }}</p>
+  <p>Estado: {{ ejemplar.estado }}</p>
+  <!-- Agrega más detalles según sea necesario -->
+{% endblock body %} 

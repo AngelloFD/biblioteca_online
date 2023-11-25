@@ -1,0 +1,104 @@
+body {
+    background-color: #F8F9fa;
+    padding: 20px;
+    color: rgb(247, 220, 42);
+}
+
+.bg-light {
+    background-color: rgb(161, 156, 156)!important;
+    border-radius: 10px;
+}
+
+.navbar-light .navbar-brand {
+    color: rgb(255 255 255 / 90%);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(247, 220, 42)
+}
+
+h1 {
+    color: black;
+    margin-bottom: 20px;
+    font-size: 2em; /* Ajusta el tamaño del texto */
+    text-align: center; /* Alinea el texto al centro */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    font-weight: bold; /* Hace que el texto sea más grueso (negrita) */
+}
+
+form {
+    background-color: rgb(161, 156, 156);
+    border-radius: 30px; 
+    height: 760px; /* Ajusta la altura según tus preferencias */
+    width: 700px; /* Ajusta el ancho según tus preferencias */
+    padding: 20px;
+    margin: auto;
+}
+
+label {
+    margin-top: 10px;
+    display: block;
+    font-size: 2em; /* Ajusta el tamaño del texto */
+    color: #000000; /* Cambia el color del texto */
+    font-weight: bold; /* Hace el texto más grueso (negrita) */
+}
+
+input {
+    font-family: 'EB Garamond', serif; /* Cambia la fuente del texto */
+    margin-bottom: 15px;
+}
+#boton1 {
+    background-color: #F8D442;
+    border-color: #000000;
+    border-radius: 70px; 
+    font-family: 'Playfair Display', serif;
+    color: #000000;
+    font-weight: bold; /* Hace el texto más grueso (negrita) */
+    margin-top: 15px;
+    width: 100%;
+}
+#boton2 {
+    background-color: #F8D442;
+    border-color: #000000;
+    border-radius: 70px; 
+    font-family: 'Playfair Display', serif;
+    color: #000000;
+    font-weight: bold; /* Hace el texto más grueso (negrita) */
+    margin-top: 15px;
+    width: 100%;
+}
+#boton3 {
+    background-color: red;
+    border-color: #000000;
+    border-radius: 70px; 
+    font-family: 'Playfair Display', serif;
+    color: #000000;
+    font-weight: bold; /* Hace el texto más grueso (negrita) */
+    margin-top: 15px;
+    width: 100%;
+}
+.btn-group {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-group button {
+    flex: 1;
+    margin: 0 5px;
+    width: 100%;
+}
+h1, h3 {
+    text-align: center;
+}
+.form-container {
+    background-color: white; 
+    padding: 20px;
+    border-radius: 70px; 
+    height: 900px; /* Ajusta la altura según tus preferencias */
+    width: 1200px; /* Ajusta el ancho según tus preferencias */
+    margin: 0 auto; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade una sombra ligera */
+}
+a {
+    color: black;
+}

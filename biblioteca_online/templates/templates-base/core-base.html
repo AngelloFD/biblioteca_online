@@ -8,8 +8,10 @@
     <title>
       {% block titletext %}
 
-      {% endblock %}
+      {% endblock %} 
     </title>
+
+    <script src="{% static 'js/bandeja_add.js' %}"></script>
     <!-- Enlaces a los archivos CSS de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <!-- Otros estilos CSS personalizados, si los tienes -->
@@ -22,7 +24,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 
     {% block customcss %}
-
+    <style>
+      body {
+          background-color: #f1c44d; /* Cambia el color de fondo según tus preferencias */
+      }
+      .bg-light {
+          --bs-bg-opacity: 1;
+          background-color: #ebcd7a;
+      }
+    </style>
     {% endblock %}
   </head>
   <body>
@@ -55,11 +65,21 @@
               <a class="nav-link text-dark dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user }}</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="#!">Mis solicitudes</a>
+                  <a class="dropdown-item" href="{% url 'usuario:solicitud_user' %}">Mis solicitudes</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="\confUser">Configuración</a>
+                  <a class="dropdown-item" href="\confUsuario">Configuración</a>
                 </li>
+                {% if user.is_staff and user.username == 'booker' %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'bibliotecario:dashboardBooker' %}">Dashboard del Bibliotecario</a>
+                </li>
+                {% endif %}
+                {% if user.is_superuser %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'admin:index' %}">Panel de Administrador</a>
+                  </li>
+                {% endif %}
                 <li>
                   <hr class="dropdown-divider" />
                 </li>
@@ -106,12 +126,16 @@
             </thead>
             <tbody></tbody>
           </table>
+          <div class="container mt-4">
+            <div class="d-flex justify-content-between">
+              <button href="{% url 'core:crear_solicitud' %}" type="button" class="btn btn-primary">Continuar</button>
+              <button type="button" class="btn btn-secondary">Limpiar bandeja</button>
+            </div>
+          </div>
         {% endif %}
       </div>
     </div>
-    {% block bodycontent %}
-
-    {% endblock %}
+    {% block bodycontent %}{% endblock %}
     <!-- Scripts de Bootstrap y jQuery (asegúrate de incluir jQuery) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
